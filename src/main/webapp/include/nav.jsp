@@ -1,54 +1,92 @@
 <!-- nav.jsp -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-  <!-- <a class="navbar-brand" href="http://localhost:9090/javaweb/">Home</a> -->
-  <a class="navbar-brand" href="http://192.168.50.90:9090/javaweb/">Home</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="collapsibleNavbar">
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" href="${pageContext.request.contextPath}/GuestList.gu">Guest</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="${pageContext.request.contextPath}/BoardList.bo">Board</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">PDS</a>
-      </li> 
-      <li>
-      <div class="dropdown">
-  			<button type="button" class="btn text-light dropdown-toggle" data-toggle="dropdown">Study1</button>
-  			<div class="dropdown-menu">
-		      <a class="dropdown-item" href="${pageContext.request.contextPath}/study/0428_database/login.jsp">로그인 연습</a>
-		      <a class="dropdown-item" href="${pageContext.request.contextPath}/mapping/Test1">URL매핑(디렉토리패턴)</a>
-		      <a class="dropdown-item" href="${pageContext.request.contextPath}/mapping/Test5.do">URL매핑(확장자패턴1)</a>
-		      <a class="dropdown-item" href="${pageContext.request.contextPath}/mapping2/Test5.mi">URL매핑(확장자패턴2-인터페이스)</a>
-		      <a class="dropdown-item" href="${pageContext.request.contextPath}/study/0428_database/Login.re">로그인 연습2(컨트롤러)</a>
-		      <a class="dropdown-item" href="${pageContext.request.contextPath}/Password.st">암호화 연습</a>
-			  </div>
-			 </div>
-			 <li>
-      <div class="dropdown">
-  			<button type="button" class="btn text-light dropdown-toggle" data-toggle="dropdown">Study2</button>
-  			<div class="dropdown-menu">
-		      <a class="dropdown-item" href="#">URL매핑(디렉토리패턴)</a>
-		      <a class="dropdown-item" href="${pageContext.request.contextPath}/study/login/Login.pa">로그인 연습3</a>
-		      <a class="dropdown-item" href="#">Link 3</a>
-			  </div>
-			 </div>
-      <li>
-      <li>
-      <div class="dropdown">
-  			<button type="button" class="btn text-light dropdown-toggle" data-toggle="dropdown">Information</button>
-  			<div class="dropdown-menu">
-		      <a class="dropdown-item" href="#">회원정보수정</a>
-		      <a class="dropdown-item" href="#">회원목록</a>
-		      <a class="dropdown-item" href="#">회원탈퇴</a>
-			  </div>
-			 </div>
-      </li>   
-    </ul>
-  </div>  
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<% %>
+<c:set var="ctp" value="${pageContext.request.contextPath}"/>
+<style>
+	@font-face {
+    font-family: 'RIDIBatang';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/RIDIBatang.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+	}
+
+  nav.navbar {
+  	font-family: 'RIDIBatang';
+		font-size: 1.3em;
+  }
+  
+	.navbardrop:hover, .dropdown-item:hover, .nav-link:hover  {
+	  text-decoration: none;
+	  color: #96648f;
+	  cursor: pointer;
+	}
+	
+	.navbar {
+		background-color: white;
+	}
+	
+
+/* 	#n1 {
+		justify-content: flex-start;
+	}
+	
+	#n2 {
+		justify-content: flex-end;
+	} */
+
+</style>
+
+<nav class="navbar navbar-expand-sm navbar-light sticky-top">
+  <!-- Brand -->
+  <a class="navbar-brand" href="http://192.168.50.90:9090/javaweb10J/"><img src = "images/nav/프로젝트로고.png" width="70px" height="auto" class="logo"/></a>
+  <!-- Links -->
+  <div id="nb1">
+	  <ul class="navbar-nav">
+	    <!-- Dropdown -->
+	    <li class="nav-item dropdown">
+	      <a class="nav-link" id="navbardrop" data-toggle="dropdown">
+	        활동
+	      </a>
+	      <div class="dropdown-menu">
+	        <a class="dropdown-item" href="${ctp}/WorkVolun.wo">봉사활동</a>
+	        <a class="dropdown-item" href="${ctp}/WorkActive.wo">체험활동</a>
+	      </div>
+	    </li>
+	    <li class="nav-item justify-content-center">
+	      <a class="nav-link" href="${ctp}/WorkVolun.wo" id="nb1">후기</a>
+	    </li>
+	    <li class="nav-item">
+	      <a class="nav-link" href="#" id="nb2">문의</a>
+	    </li>
+	  </ul>  
+    </div>
+    <div>
+	  <ul class="navbar-nav" id="n2">
+	    <li class="nav-item">
+	      <a class="nav-link" href="#"><i class="fa fa-search"></i>검색</a>
+	    </li>
+	  	<c:if test="${sMid == vo.mid}">	
+		    <li class="nav-item">
+		      <a class="nav-link" data-toggle="modal" data-target="#myModal">로그인</a>
+		    </li>
+	    </c:if>
+	  	<c:if test="${sMid != vo.mid}">	
+		    <li class="nav-item">
+		      <a class="nav-link" href="${ctp}/MemberLogout.me">로그아웃</a>
+		    </li>
+		    <div>
+		    	<a href="#">${sMid}</a>님, 로그인 중
+		    </div>
+	    </c:if>
+	    <c:if test="${sLevel == 0}">
+		    <li class="nav-item">
+		      <a class="nav-link" href="${ctp}/ManagerMain.ma">관리자메뉴</a>
+		    </li>
+	    </c:if>
+	    <c:if test="${sMid != vo.mid}">
+	    </c:if>
+		</ul>
+		</div>
 </nav>
+

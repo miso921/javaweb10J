@@ -9,7 +9,6 @@
 	<jsp:include page="/include/bs4.jsp" />
 	<script>
 		'use strict';
-		
 		if("${msg}" != "NO") alert("${msg}");
 		location.href = '${url}';
 	</script>

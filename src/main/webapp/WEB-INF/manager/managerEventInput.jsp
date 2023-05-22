@@ -30,12 +30,12 @@
 		let cnt =1;
 		
 		function fCheck() {
-			let photo = $("#photo").val();
+			let thumbnail = $("#thumbnail").val();
 			let detail = $("#detail").val();
 			let road = $("#road").val();
 			let maxSize = 1024 * 1024 * 30 // 최대 30MByte 허용
 			
-			if(photo.trim() == "") {
+			if(thumbnail.trim() == "") {
 				alert("업로드할 파일명을 선택하세요!");
 				return false;
 			}
@@ -84,11 +84,12 @@
 		<form name="myform" method="post" action="${ctp}/ManagerEventInputOk.ma" enctype="multipart/form-data">
 			<div>
 				행사명<br />
-				<input type="text" name="eName" id="eName" autofocus required class="form-control mb-2" />
+				<input type="text" name="eventName" id="eventName" autofocus required class="form-control mb-2" />
 			</div>
 			<div>
 				행사시간<br />
-				<input type="time" name="eTime" id="eTime" required class="form-control mb-2" />
+				<!-- <input type="time" name="eTime" id="eTime" required class="form-control mb-2" /> -->
+				<input type="text" name="eTime" id="eTime"/>
 			</div>
 			<div>
 				표 개수&nbsp;<font color="red">(숫자만 입력)</font><br />
@@ -112,7 +113,7 @@
 			</div>
 			<div>
 				분류<br />
-				<select class="form-control mb-2" required>
+				<select name="part" class="form-control mb-2" required>
 					<option disabled selected>선택하세요</option>
 					<option>봉사활동</option>
 					<option>체험활동</option>
@@ -120,7 +121,7 @@
 			</div>
 			<div>
 				행사 사진<br />
-				<input type="file" name="photo" id="photo" required class="form-control-file mb-2" />
+				<input type="file" name="thumbnail" id="thumbnail" required class="form-control-file mb-2" />
 			</div>
 			<div>
 				상세내용<br />

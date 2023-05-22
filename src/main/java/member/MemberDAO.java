@@ -44,6 +44,7 @@ public class MemberDAO {
 				vo.setEmail(rs.getString("email"));
 				vo.setGender(rs.getString("gender"));
 				vo.setUserDel(rs.getString("userDel"));
+				vo.setLevel(rs.getInt("level"));
 			}
 		} catch (SQLException e) {
 			System.out.println("SQL 오류 : " + e.getMessage());

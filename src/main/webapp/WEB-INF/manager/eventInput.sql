@@ -3,7 +3,7 @@ show tables;
 create table eventInput (
 	idx         int not null auto_increment primary key,      /* 관리자 행사 등록 고유번호 */
 	eventName   varchar(30) not null,                         /* 행사명 */
-	eTime       datetime not null default now(),              /* 행사 가능 시간 */
+	eTime       varchar(10) not null,              						/* 행사 가능 시간 */
 	ticketNum   int not null,                                 /* 참여가능한 표 개수 */
 	place       varchar(30) not null,                         /* 행사 장소 */
 	target      varchar(30),                                  /* 모집 대상 */

@@ -66,9 +66,9 @@ public class ManagerEventInputOkCommand implements ManagerInterface {
 		vo.setPeople(people);
 		vo.setMoney(money);
 		vo.setPart(part);
-		vo.setThumbnail(thumbnail);
-		vo.setDetail(detail);
-		vo.setRoad(road);
+		vo.setThumbnail(filesystemName);
+		vo.setDetail(filesystemName);
+		vo.setRoad(filesystemName);
 		
 		ManagerDAO dao = new ManagerDAO();
 		int res = dao.setManagerEventInputOk(vo);

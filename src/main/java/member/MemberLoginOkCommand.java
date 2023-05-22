@@ -17,7 +17,7 @@ public class MemberLoginOkCommand implements MemberInterface {
 		String mid = request.getParameter("mid") == null ? "" : request.getParameter("mid");
 		String pwd = request.getParameter("pwd") == null ? "" : request.getParameter("pwd");
 		String idSave = request.getParameter("idSave") == null ? "" : request.getParameter("idSave");
-		System.out.println("들어옴"+mid);
+		
 		MemberDAO dao = new MemberDAO();
 		
 		MemberVO vo = dao.getMemberMidCheck(mid);

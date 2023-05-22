@@ -59,7 +59,7 @@
 				  location.href = "${ctp}/";
 			  }
 			  else {
-				  alert("로그인 실패~~");
+				  alert("로그인에 실패했습니다!");
 			  }
 		  },
 			error: function() {
@@ -89,8 +89,8 @@
 	      			<label for="pwd">비밀번호</label>
 	      				<input type="password" class="form-control" name="pwd" id="pwd" placeholder="비밀번호를 입력하세요." required />
 	      		</div>
-	        	<div id="f1" class="text-left"><a href="${ctp}/" style="color: black; font-size: 1em; text-align:left">아이디찾기</a></div><br />
-	        	<div id="f2" class="text-left"><a href="${ctp}/" style="color: black; font-size: 1em;">비밀번호찾기</a></div>
+	        	<div id="f1" class="text-left"><a href="${ctp}/MemberFindMid.me" style="color: black; font-size: 1em; text-align:left">아이디찾기</a></div><br />
+	        	<%-- <div id="f2" class="text-left"><a href="${ctp}/MemberChangePwd.me" style="color: black; font-size: 1em;">비밀번호찾기</a></div> --%>
 	          <button type="button" onclick="loginCheck()" class="btn btn-outline-success mr-1">로그인</button>
 	          <button type="button" class="btn btn-outline-primary" onclick="location.href='${ctp}/MemberJoin.me';">회원가입</button>
 	      	</form>	

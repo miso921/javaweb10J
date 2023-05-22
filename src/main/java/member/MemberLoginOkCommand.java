@@ -8,8 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.json.simple.JSONObject;
-
 import conn.SecurityUtil;
 
 public class MemberLoginOkCommand implements MemberInterface {
@@ -48,7 +46,7 @@ public class MemberLoginOkCommand implements MemberInterface {
 		session.setAttribute("sMid", mid);
 		session.setAttribute("sNick", vo.getNick());
 		session.setAttribute("sLevel", vo.getLevel());
-		
+		System.out.println(vo.getLevel());
 		// 2번
 		Cookie cMid = new Cookie("cMid", mid);
 		if(idSave.equals("on")) {
@@ -62,9 +60,9 @@ public class MemberLoginOkCommand implements MemberInterface {
 		response.getWriter().write("1");
 		
 		
+		request.setAttribute("vo", vo);
 //		request.setAttribute("msg", vo.getMid() + (vo.getNick()) + "님 로그인 되었습니다!");
 //		request.setAttribute("url", request.getContextPath()+"/");
-		request.setAttribute("vo", vo);
 		
 //		JSONObject json = new JSONObject();
 //		json.put("jMid",vo.getMid());

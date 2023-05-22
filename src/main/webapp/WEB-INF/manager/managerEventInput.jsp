@@ -26,10 +26,8 @@
 </head>
 <body>
 <!-- <div class="container"> -->
-	<div>
-		<jsp:include page="/include/managerMainMenu.jsp" />
-	</div>	
-	<div id="content" class="form-control borderless">
+	<div id="content">
+	<jsp:include page="/include/managerMainMenu.jsp" />
 		<form name="eventForm" method="post" action="">
 			<div>
 				행사명<br />

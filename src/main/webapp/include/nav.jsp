@@ -1,7 +1,10 @@
 <!-- nav.jsp -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<% %>
+<% 
+	int sLevel = session.getAttribute("sLevel")== null ? 99 : (int) session.getAttribute("sLevel");
+	pageContext.setAttribute("sLevel", sLevel);
+%>
 <c:set var="ctp" value="${pageContext.request.contextPath}"/>
 <style>
 	@font-face {
@@ -26,6 +29,10 @@
 		background-color: white;
 	}
 	
+	#sMid:hover {
+		text-decoration: none;
+		color: red;
+	}
 
 /* 	#n1 {
 		justify-content: flex-start;
@@ -39,7 +46,7 @@
 
 <nav class="navbar navbar-expand-sm navbar-light sticky-top">
   <!-- Brand -->
-  <a class="navbar-brand" href="http://192.168.50.90:9090/javaweb10J/"><img src = "images/nav/프로젝트로고.png" width="70px" height="auto" class="logo"/></a>
+  <a class="navbar-brand" href="${ctp}/"><img src = "images/nav/프로젝트로고.png" width="70px" height="auto" class="logo"/></a>
   <!-- Links -->
   <div id="nb1">
 	  <ul class="navbar-nav">
@@ -66,25 +73,23 @@
 	    <li class="nav-item">
 	      <a class="nav-link" href="#"><i class="fa fa-search"></i>검색</a>
 	    </li>
-	  	<c:if test="${sMid == vo.mid}">	
+	  	<c:if test="${sMid == null}">	
 		    <li class="nav-item">
 		      <a class="nav-link" data-toggle="modal" data-target="#myModal">로그인</a>
 		    </li>
 	    </c:if>
-	  	<c:if test="${sMid != vo.mid}">	
+	  	<c:if test="${sMid != null}">	
 		    <li class="nav-item">
 		      <a class="nav-link" href="${ctp}/MemberLogout.me">로그아웃</a>
 		    </li>
 		    <div>
-		    	<a href="#">${sMid}</a>님, 로그인 중
+		    	<a href="MemberMypageMain.me" id="sMid"><font color="white;">${sMid}(${sNick})</font></a>님, 로그인 중
 		    </div>
 	    </c:if>
 	    <c:if test="${sLevel == 0}">
 		    <li class="nav-item">
 		      <a class="nav-link" href="${ctp}/ManagerMain.ma">관리자메뉴</a>
 		    </li>
-	    </c:if>
-	    <c:if test="${sMid != vo.mid}">
 	    </c:if>
 		</ul>
 		</div>

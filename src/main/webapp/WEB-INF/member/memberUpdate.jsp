@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <c:set var="ctp" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>memberJoin.jsp</title>
+	<title>memberUpdate.jsp</title>
 	<jsp:include page="/include/bs4.jsp" />
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script src="${ctp}/js/woo.js"></script>
@@ -34,45 +35,32 @@
 <jsp:include page="/include/nav.jsp" />
 <p><br /></p>
 <div class="container" style="text-align:center;">
-  <h2 class="text-center mb-5"><b>회 원 가 입</b></h2>
-  <form name="myform" method="post" action="${ctp}/MemberJoinOk.me" class="was-validated">
+  <form name="myform" method="post" action="${ctp}/MemberUpdateOk.me">
+  <h2 class="text-center mb-5"><b>회 원 정 보 수 정</b></h2>
     <div class="form-group">
-      <label for="name"><span style="color:red">*</span>성명</label>
-      <input type="text" class="form-control" name="name" id="name" placeholder="이름을 입력하세요" oninput="vNameCheck()" required autofocus />
-      <div class="valid-feedback" id="nameOk">올바른 이름 형식입니다.</div>
-      <div class="invalid-feedback" id="nameError">최대 10자리의 한글과 대/소문자 사용가능</div>
-    </div><br />
-    <div class="form-group">
-      <label for="mid"><span style="color:red">*</span>아이디&nbsp;<input type="button" value="아이디중복확인" id="midBtn" class="btn btn-info btn-sm" onclick="idCheck()"/></label>
-      <input type="text" class="form-control" name="mid" id="mid" placeholder="아이디를 입력하세요" required />
-    </div><br />
+    	아이디 : ${sMid}
+    </div>	
     <div class="form-group">
       <label for="nick"><span style="color:red">*</span>닉네임&nbsp;<input type="button" value="닉네임중복확인" id="nickBtn" class="btn btn-info btn-sm" onclick="nickCheck()"/></label>
-      <input type="text" class="form-control" name="nick" id="nick" placeholder="닉네임을 입력하세요" required />
-    </div><br />
-    <div class="form-group">
-      <label for="pwd"><span style="color:red">*</span>비밀번호</label>
-      <input type="password" class="form-control" name="pwd" id="pwd" placeholder="비밀번호를 입력하세요" oninput="vPwdCheck()" required />
-      <div class="valid-feedback" id="pwdOk">올바른 비밀번호 형식입니다.</div>
-      <div class="invalid-feedback" id="pwdError">8~20자리의 최소 1자리의 대/소문자, 숫자 포함하여 사용 가능</div>
+      <input type="text" class="form-control" name="nick" id="nick" value="${sNick}" placeholder="닉네임을 입력하세요" required />
     </div><br />
     <div class="form-group">
       <label for="birthday">생년월일</label>
-      <input type="date" class="form-control" name="birthday" id="birthday" value="<%=java.time.LocalDate.now() %>" />
+      <input type="date" class="form-control" name="birthday" id="birthday"  value="${birthday}" />
     </div><br />
     <div class="form-group">
     		<label for="address">주소</label>
     		<div class="input-group mb-1">
-      		<input type="text" name="postcode" id="sample6_postcode" placeholder="우편번호" class="form-control">
+      		<input type="text" name="postcode" id="sample6_postcode" value="${postcode}" placeholder="우편번호" class="form-control">
       		<div class="input-group-append">
         		<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" class="btn btn-secondary">
       		</div>
     		</div>
-    		<input type="text" name="roadAddress" id="sample6_address" size="50" placeholder="주소" class="form-control mb-1">
+    		<input type="text" name="roadAddress" id="sample6_address" value="${roadAddress}" size="50" placeholder="주소" class="form-control mb-1">
     		<div class="input-group mb-1">
-       		<input type="text" name="extraAddress" id="sample6_extraAddress" placeholder="참고항목" class="form-control"> &nbsp;&nbsp;
+       		<input type="text" name="extraAddress" id="sample6_extraAddress" value="${extraAddress}" placeholder="참고항목" class="form-control"> &nbsp;&nbsp;
       			<div class="input-group-append">
-      				<input type="text" name="detailAddress" id="sample6_detailAddress" placeholder="상세주소" class="form-control">
+      				<input type="text" name="detailAddress" id="sample6_detailAddress" value="${detailAddress}" placeholder="상세주소" class="form-control">
       			</div>
     		</div>
   		</div><br />
@@ -94,22 +82,22 @@
               <option value="062">광주</option>
           		</select>-
       		</div>
-	        <input type="text" name="tel2" size=4 maxlength=4 class="form-control ml-2 mr-2"/>-
-	        <input type="text" name="tel3" size=4 maxlength=4 class="form-control ml-2"/>
+	        <input type="text" name="tel2" value="${tel2}" size=4 maxlength=4 class="form-control ml-2 mr-2"/>-
+	        <input type="text" name="tel3" value="${tel3}" size=4 maxlength=4 class="form-control ml-2"/>
     		</div>
   		</div><br />
   		<div class="form-group">
     		<label for="email1">이메일</label>
       		<div class="input-group mb-3">
-        		<input type="text" class="form-control" placeholder="이메일을 입력하세요" id="email1" name="email1" />&nbsp;
+        		<input type="text" class="form-control" placeholder="이메일을 입력하세요" id="email1" name="email1" value="${email1}" required />&nbsp;
         		<div class="input-group-append">
           		<select name="email2" class="custom-select">
-              <option value="naver.com" selected>naver.com</option>
-              <option value="hanmail.net">hanmail.net</option>
-              <option value="hotmail.com">hotmail.com</option>
-              <option value="gmail.com">gmail.com</option>
-              <option value="nate.com">nate.com</option>
-              <option value="yahoo.com">yahoo.com</option>
+              <option value="naver.com"   <c:if test="${email2=='naver.com'}">selected</c:if>>naver.com</option>
+              <option value="hanmail.net" <c:if test="${email2=='hanmail.net'}">selected</c:if>>hanmail.net</option>
+              <option value="hotmail.com" <c:if test="${email2=='hotmail.com'}">selected</c:if>>hotmail.com</option>
+              <option value="gmail.com"   <c:if test="${email2=='gmail.com'}">selected</c:if>>gmail.com</option>
+              <option value="nate.com"    <c:if test="${email2=='nate.com'}">selected</c:if>>nate.com</option>
+              <option value="yahoo.com"   <c:if test="${email2=='yahoo.com'}">selected</c:if>>yahoo.com</option>
           		</select>
         		</div>
       		</div>
@@ -118,17 +106,17 @@
     		<div class="form-check-inline">
       		<span class="input-group-text">성별 :</span> &nbsp; &nbsp;
       			<label class="form-check-label">
-        			<input type="radio" class="form-check-input" name="gender" value="미선택" checked>미선택
+        			<input type="radio" class="form-check-input" name="gender" value="미선택" <c:if test="${vo.gender=='미선택'}">checked</c:if>>미선택
       			</label>
     		</div>
     		<div class="form-check-inline">
     			<label class="form-check-label">
-        		<input type="radio" class="form-check-input" name="gender" value="남자">남자
+        		<input type="radio" class="form-check-input" name="gender" value="남자" <c:if test="${vo.gender=='남자'}">checked</c:if>>남자
       		</label>
     		</div>
     		<div class="form-check-inline">
     			<label class="form-check-label">
-        		<input type="radio" class="form-check-input" name="gender" value="여자">여자
+        		<input type="radio" class="form-check-input" name="gender" value="여자" <c:if test="${vo.gender=='여자'}">checked</c:if>>여자
       		</label>
     		</div>
   		</div><br />

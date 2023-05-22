@@ -17,39 +17,6 @@ public class MemberDAO {
 	private MemberVO vo = null;
 	String sql = "";
 	
-	public MemberDAO() {
-		String url = "jdbc:mysql://localhost:3306/javaweb10J";
-		String user = "root";
-		String password = "1234";
-		
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			
-			conn = DriverManager.getConnection(url, user, password);
-		} catch (ClassNotFoundException e) {
-			System.out.println("Driver 검색 실패!");
-		} catch (SQLException e) {
-			System.out.println("Database 연동 실패!");
-		}
-	}
-	
-	// 사용한 객체 반납
-	public void pstmtClose() {
-		if(pstmt != null) {
-			try {
-				pstmt.close();
-			} catch (SQLException e) {}
-		}
-	}
-	
-	public void rsClose() {
-		if(rs != null) {
-			try {
-				rs.close();
-				pstmt.close();
-			} catch(SQLException e) {}
-		}
-	}
 
 	public long getHashTableSearch(int randomKey) {
 		return 0;
@@ -141,6 +108,52 @@ public class MemberDAO {
 			getConn.pstmtClose();
 		}
 		return vo;
+	}
+
+	// 아이디 찾기
+	public MemberVO getMemberFindMidOk(String name, String nick) {
+		MemberVO vo = new MemberVO();
+		try {
+			sql = "selecet mid,name,nick from member where name=? and nick=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, name);
+			pstmt.setString(2, nick);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				vo.setName(rs.getString("name"));
+				vo.setMid(rs.getString("mid"));
+				vo.setNick(rs.getString("nick"));
+			}
+		} catch (SQLException e) {
+			System.out.println("SQL 오류 : " + e.getMessage());
+		} finally {
+			getConn.rsClose();
+		}
+		return vo;
+	}
+
+	// 회원정보 수정 처리
+	public int getMemberUpdateOk(MemberVO vo) {
+		int res = 0;
+		try {
+			sql = "update member set name=?, nick=?, birthday=?, address=?,"
+					+ "tel=?, email=?, gender=? where mid=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, vo.getName());
+			pstmt.setString(2, vo.getNick());
+			pstmt.setString(3, vo.getBirthday());
+			pstmt.setString(4, vo.getAddress());
+			pstmt.setString(5, vo.getTel());
+			pstmt.setString(6, vo.getEmail());
+			pstmt.setString(7, vo.getGender());
+			res = 1;
+		} catch (SQLException e) {
+			System.out.println("SQL 오류 : " + e.getMessage());
+		} finally {
+			getConn.pstmtClose();
+		}
+		return res;
 	}
 
 	

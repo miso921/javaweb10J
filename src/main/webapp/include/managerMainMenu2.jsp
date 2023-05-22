@@ -30,21 +30,22 @@
 		}
 		
 		/* layout */
-		#container{position:absolute;top:0px;bottom:0px;width:100%;}
-		#aside{position:absolute;left:0;top:0px;bottom:0;width:200px;padding:10px;overflow:auto;box-sizing:border-box;border-right:1px solid #ddd;background:#fff;padding-top:100px;}
+		#con{position:absolute;top:0px;bottom:0px;width:100%;}
+		#aside{position:absolute;left:0;top:0px;bottom:0;width:200px;padding:10px;overflow:auto;box-sizing:border-box;border-right:1px solid #ddd;background:#fff;}
 	</style>
 </head>
 <body>
-	<div id="container">
+	<div id="con">
 		<div id="aside">
 			<div class="aside-menu">
 				<ul class="mt-5 ml-4">
 				<li id="home"><a href="${ctp}/">홈</a></li>
 				<li class="mn"><a href="#">회원관리</a></li>
 					<div class="dropdown">
+						<button type="button" class="btn text-light dropdown-tog" data-toggle="dropdown" style="font-color:black;">행사관리</button>
 							<div class="dropdown-menu">
-				        <a class="dropdown-item" href="${ctp}/ManagerEventInput.ma">내정보수정</a>
-				        <a class="dropdown-item" href="${ctp}/managerEventList.ma">비밀번호수정</a>
+				        <a class="dropdown-item" href="${ctp}/ManagerEventInput.ma">행사등록</a>
+				        <a class="dropdown-item" href="${ctp}/managerEventList.ma">행사목록</a>
 			      	</div>
 					</div>
 				<li class="mn"><a href="#">예약관리</a></li>

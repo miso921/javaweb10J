@@ -1,16 +1,16 @@
 package member;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import conn.GetConn;
 
+
 public class MemberDAO {
 	GetConn getConn = GetConn.getInstance();
-	private Connection conn = null;
+	private Connection conn = getConn.getConn();
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
 	
@@ -23,7 +23,7 @@ public class MemberDAO {
 	}
 
 	// 로그인 시 아이디가 있는지 체크 후 있으면 vo에 모두 담는다.
-	public MemberVO getLoginMidCheck(String mid) {
+	public MemberVO getMemberMidCheck(String mid) {
 		vo = new MemberVO();
 		try {
 			sql = "select * from member where mid = ?";

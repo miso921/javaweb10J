@@ -23,8 +23,13 @@ public class ManagerController extends HttpServlet {
 		if(com.equals("/ManagerMain")) {
 			viewPage += "/managerMain.jsp";
 		}
-		if(com.equals("/ManagerEvent")) {
-			viewPage += "/managerEvent.jsp";
+		else if(com.equals("/ManagerEventInput")) {
+			viewPage += "/managerEventInput.jsp";
+		}
+		else if(com.equals("/ManagerEventInputOk")) {
+			command = new ManagerEventInputOkCommand();
+			command.execute(request, response);
+			viewPage = "/include/message.jsp";
 		}
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 		dispatcher.forward(request, response);

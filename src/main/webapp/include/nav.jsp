@@ -1,10 +1,6 @@
 <!-- nav.jsp -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<% 
-	int sLevel = session.getAttribute("sLevel")== null ? 99 : (int) session.getAttribute("sLevel");
-	pageContext.setAttribute("sLevel", sLevel);
-%>
 <c:set var="ctp" value="${pageContext.request.contextPath}"/>
 <style>
 	@font-face {
@@ -86,7 +82,7 @@
 		    	<a href="MemberMypageMain.me" id="sMid"><font color="white;">${sMid}(${sNick})</font></a>님, 로그인 중
 		    </div>
 	    </c:if>
-	    <c:if test="${sLevel == 0}">
+	    <c:if test="${sMid == 'admin'}">
 		    <li class="nav-item">
 		      <a class="nav-link" href="${ctp}/ManagerMain.ma">관리자메뉴</a>
 		    </li>

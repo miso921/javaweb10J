@@ -17,10 +17,10 @@ public class MemberLoginOkCommand implements MemberInterface {
 		String mid = request.getParameter("mid") == null ? "" : request.getParameter("mid");
 		String pwd = request.getParameter("pwd") == null ? "" : request.getParameter("pwd");
 		String idSave = request.getParameter("idSave") == null ? "" : request.getParameter("idSave");
-		
+		System.out.println("들어옴"+mid);
 		MemberDAO dao = new MemberDAO();
 		
-		MemberVO vo = dao.getLoginMidCheck(mid);
+		MemberVO vo = dao.getMemberMidCheck(mid);
 		
 		if(vo.getSalt() == null || vo.getUserDel().equals("OK")) {
 			request.setAttribute("msg", "회원정보가 없습니다.\\n다시 입력하세요.");
@@ -46,7 +46,7 @@ public class MemberLoginOkCommand implements MemberInterface {
 		session.setAttribute("sMid", mid);
 		session.setAttribute("sNick", vo.getNick());
 		session.setAttribute("sLevel", vo.getLevel());
-		System.out.println(vo.getLevel());
+		
 		// 2번
 		Cookie cMid = new Cookie("cMid", mid);
 		if(idSave.equals("on")) {

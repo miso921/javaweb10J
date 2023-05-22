@@ -16,7 +16,7 @@ public class MemberUpdateCommand implements MemberInterface {
 		
 		MemberDAO dao = new MemberDAO();
 		
-		MemberVO vo = dao.getLoginMidCheck(mid);
+		MemberVO vo = dao.getMemberMidCheck(mid);
 		
 		// email분리
 		String[] email = vo.getEmail().split("@");

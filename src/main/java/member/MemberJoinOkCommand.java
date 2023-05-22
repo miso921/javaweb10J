@@ -25,7 +25,7 @@ public class MemberJoinOkCommand implements MemberInterface {
 		String userDel = request.getParameter("userDel") == null ? "" : request.getParameter("userDel");
 		MemberDAO dao = new MemberDAO();
 		
-		MemberVO vo = dao.getLoginMidCheck(mid);
+		MemberVO vo = dao.getMemberMidCheck(mid);
 		if(vo.getMid() != null) {
 			request.setAttribute("msg", "이미 사용중인 아이디입니다.");
 			request.setAttribute("url", request.getContextPath()+"/MemberJoin.lo");

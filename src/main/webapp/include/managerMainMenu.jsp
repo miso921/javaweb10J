@@ -8,6 +8,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>managerMainLeft.jsp</title>
 	<jsp:include page="/include/bs4.jsp" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 	<style>
 		@font-face {
 	    font-family: 'Pretendard-Regular';
@@ -30,28 +32,28 @@
 		}
 		
 		/* layout */
-		#con{position:absolute;top:0px;bottom:0px;width:100%;}
-		#aside{position:absolute;left:0;top:0px;bottom:0;width:200px;padding:10px;overflow:auto;box-sizing:border-box;border-right:1px solid #ddd;background:#fff;}
+		.container{position:absolute;top:0px;bottom:0px;width:100%;}
+		.side{position:absolute;left:0;top:0px;bottom:0;width:200px;height:auto;padding:10px;overflow:auto;box-sizing:border-box;border-right:1px solid #ddd;background:#fff;}
+		.btn{color:black;}
 	</style>
 </head>
 <body>
-	<div id="con">
-		<div id="aside">
-			<div class="aside-menu">
-				<ul class="mt-5 ml-4">
-				<li id="home"><a href="${ctp}/">홈</a></li>
-				<li class="mn"><a href="#">회원관리</a></li>
-					<div class="dropdown">
-						<button type="button" class="btn text-light dropdown-tog" data-toggle="dropdown" style="font-color:black;">행사관리</button>
-							<div class="dropdown-menu">
-				        <a class="dropdown-item" href="${ctp}/ManagerEventInput.ma">행사등록</a>
-				        <a class="dropdown-item" href="${ctp}/managerEventList.ma">행사목록</a>
-			      	</div>
-					</div>
-				<li class="mn"><a href="#">예약관리</a></li>
-				</ul>
-			</div>
-		</div><!-- //#aside -->
-	</div><!-- //#con -->
+<div class="container">
+	<div class="side">
+	  <div class="btn-group-vertical ml-5 mt-2">
+	    <a href="${ctp}/ManagerMember.ma"><font size="5px" color="black">회원관리</font></a>
+	    <a href="${ctp}/ManagerRez.ma"><font size="5px" color="black">예약관리</font></a>
+	    <div class="btn-group">
+	      <div type="button" class="dropdown-toggle" data-toggle="dropdown"><font size="5px">
+	        행사관리
+	      </div></font>
+	      <div class="dropdown-menu">
+	        <a class="dropdown-item" href="${ctp}/ManagerEventInput.ma">행사등록</a>
+	        <a class="dropdown-item" href="#">행사목록</a>
+	      </div>
+	    </div>
+	  </div>
+	</div>	  
+</div>
 </body>
 </html>

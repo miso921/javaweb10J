@@ -20,7 +20,7 @@ public class MemberMypageInfoOkCommand implements MemberInterface {
 		
 		MemberDAO dao = new MemberDAO();
 		
-		MemberVO vo = dao.getLoginMidCheck(mid);
+		MemberVO vo = dao.getMemberMidCheck(mid);
 		
 		SecurityUtil security = new SecurityUtil();
 		pwd = security.encryptSHA256(vo.getSalt() + pwd);

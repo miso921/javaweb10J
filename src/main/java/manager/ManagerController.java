@@ -32,7 +32,25 @@ public class ManagerController extends HttpServlet {
 			viewPage = "/include/message.jsp";
 		}
 		else if(com.equals("/ManagerEventList")) {
+			command = new ManagerEventListCommand();
+			command.execute(request, response);
 			viewPage += "/managerEventList.jsp";
+		}
+		else if(com.equals("/ManagerEventContent")) {
+			viewPage += "/managerEventContent.jsp";
+		}
+		else if(com.equals("/ManagerMemberList")) {
+			viewPage += "/managerMemberList.jsp";
+		}
+		else if(com.equals("/ManagerEventDelete")) {
+			command = new ManagerEventDeleteCommand();
+			command.execute(request, response);
+			viewPage = "/include/message.jsp";
+		}
+		else if(com.equals("/ManagerMemberList")) {
+			command = new ManagerMemberListCommand();
+			command.execute(request, response);
+			viewPage += "/managerMemberList.jsp";
 		}
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 		dispatcher.forward(request, response);

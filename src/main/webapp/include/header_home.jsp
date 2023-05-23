@@ -10,10 +10,10 @@
   </ul>
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="images/이벤트11.png" alt="Los Angeles" width="100%" height=300">
+      <img src="images/이벤트임1.png" alt="Los Angeles" width="100%" height=300">
     </div>
     <div class="carousel-item">
-      <img src="images/이벤트11.png" alt="Chicago" width="100%" height="300">
+      <img src="images/이벤트임2.png" alt="Chicago" width="100%" height="300">
     </div>
     <div class="carousel-item">
       <img src="images/이벤트11.png" alt="New York" width="100%" height="300">

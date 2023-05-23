@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import conn.GetConn;
 
@@ -21,23 +22,85 @@ public class ManagerDAO {
 	public int setManagerEventInputOk(ManagerVO vo) {
 		int res = 0;
 		try {
-			sql = "insert into eventInput values (default,?,?,?,?,?,?,?,?,?,?,?)";
+			sql = "insert into eventInput values (default,?,?,?,?,default,?,?,?,?)";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, vo.getEventName());
-			pstmt.setString(2, vo.geteTime());
-			pstmt.setInt(3, vo.getTicketNum());
-			pstmt.setString(4, vo.getPlace());
-			pstmt.setString(5, vo.getTarget());
-			pstmt.setInt(6, vo.getPeople());
+			pstmt.setString(1, vo.getPart());
+			pstmt.setString(2, vo.getEventName());
+			pstmt.setString(3, vo.geteTime());
+			pstmt.setInt(4, vo.getPeople());
+			pstmt.setString(5, vo.getPlace());
+			pstmt.setString(6, vo.getTarget());
 			pstmt.setInt(7, vo.getMoney());
-			pstmt.setString(8, vo.getPart());
-			pstmt.setString(9, vo.getThumbnail());
-			pstmt.setString(10, vo.getDetail());
-			pstmt.setString(11, vo.getRoad());
+			pstmt.setString(8, vo.getPhoto());
 			pstmt.executeUpdate();
 			res = 1;
 		} catch (SQLException e) {
-			System.out.println("SQL 오류 : " + e.getMessage());
+			System.out.println("SQL 오류(setManagerEventInputOk) : " + e.getMessage());
+		} finally {
+			getConn.pstmtClose();
+		}
+		return res;
+	}
+
+	// 전체 레코드 건수 구하기
+	public int getTotRecCnt() {
+		int totRecCnt = 0;
+		try {
+			sql = "select count(idx) as cnt from eventInput";
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			rs.next();
+			totRecCnt = rs.getInt("cnt");
+		} catch (SQLException e) {
+			System.out.println("SQL 오류(getTotRecCnt) : " + e.getMessage());
+		} finally {
+			getConn.rsClose();
+		}
+		return totRecCnt;
+	}
+
+	// 행사 전체 조회 처리
+	public ArrayList<ManagerVO> getEventList(int startIndexNo, int pageSize) {
+		ArrayList<ManagerVO> vos = new ArrayList<>();
+		try {
+			sql = "select * from eventInput order by idx desc limit ?,?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, startIndexNo);
+			pstmt.setInt(2, pageSize);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				vo = new ManagerVO();
+				vo.setIdx(rs.getInt("idx"));
+				vo.setPart(rs.getString("part"));
+				vo.setEventName(rs.getString("eventName"));
+				vo.seteTime(rs.getString("eTime"));
+				vo.setPeople(rs.getInt("people"));
+				vo.setPlace(rs.getString("place"));
+				vo.setTarget(rs.getString("target"));
+				vo.setMoney(rs.getInt("money"));
+				vo.setPhoto(rs.getString("photo"));
+				vos.add(vo); // vos에 데이터 추가!
+			}
+		} catch (SQLException e) {
+			System.out.println("SQL 오류(getEventList) : " + e.getMessage());
+		} finally {
+			getConn.rsClose();
+		}
+		return vos;
+	}
+
+	// 행사정보 삭제 처리
+	public int setManagerEventDelete(int idx) {
+		int res = 0;
+		try {
+			sql = "delete from eventInput where idx = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, idx);
+			pstmt.executeUpdate();
+			res = 1;
+		} catch (SQLException e) {
+			System.out.println("SQL 오류(setManagerEventDelete) : " + e.getMessage());
 		} finally {
 			getConn.pstmtClose();
 		}

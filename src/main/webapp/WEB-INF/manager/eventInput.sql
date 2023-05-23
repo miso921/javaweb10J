@@ -2,17 +2,15 @@ show tables;
 
 create table eventInput (
 	idx         int not null auto_increment primary key,      /* 관리자 행사 등록 고유번호 */
+	part        char(4) not null,                             /* 분류 (봉사활동, 체험활동) */
 	eventName   varchar(30) not null,                         /* 행사명 */
-	eTime       varchar(10) not null,              						/* 행사 가능 시간 */
-	ticketNum   int not null,                                 /* 참여가능한 표 개수 */
+	eTime       varchar(20) not null,              						/* 행사 가능 시간 */
+	people      int not null,                                 /* 모집 인원 */
+	peopleNum   int default 0,                                /* 실제 참여한 인원 수 */
 	place       varchar(30) not null,                         /* 행사 장소 */
 	target      varchar(30),                                  /* 모집 대상 */
-	people      int,                                          /* 모집 인원 */
 	money       int,                                          /* 참가비 */
-	part        char(4) not null,                             /* 분류 (봉사활동, 체험활동) */
-	thumbnail   varchar(100) not null,                        /* 행사 홍보 사진 */
-	detail      varchar(100),                                 /* 행사 상세 정보 */
-	road        varchar(100),                                 /* 오시는 길 */
+	photo       varchar(100) not null,                        /* 행사사진 / 상세정보 / 오시는길 사진 */
 	UNIQUE KEY unique_name (eventName)                         
 );
 

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <c:set var="ctp" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html>
@@ -55,11 +56,11 @@
 	<div class="row text-center">
 		<div class="col-1 border font-weight-bold">번호</div>
 		<div class="col-1 border font-weight-bold">성명</div>
-		<div class="col-2 border font-weight-bold">아이디</div>
+		<div class="col-1 border font-weight-bold">아이디</div>
 		<div class="col-1 border font-weight-bold">별명</div>
 		<div class="col-1 border font-weight-bold">생년월일</div>
 		<div class="col-1 border font-weight-bold">전화번호</div>
-		<div class="col-1 border font-weight-bold">이메일</div>
+		<div class="col-2 border font-weight-bold">이메일</div>
 		<div class="col-1 border font-weight-bold">성별</div>
 		<div class="col-1 border font-weight-bold">탈퇴신청</div>
 		<div class="col-1 border font-weight-bold">등급</div>
@@ -67,17 +68,22 @@
 	</div>
 	<c:forEach var="vo" items="${vos}" varStatus="st">
 	<div class="row hover text-center">
-		<div class="col-1 border">${curScrStartNo}</div>
-		<div class="col-1 border">${vo.name}</div>
-		<div class="col-2 border">${vo.mid}</div>
-		<div class="col-1 border">${vo.nick}</div>
-		<div class="col-1 border">${vo.birthday}</div>
-		<div class="col-1 border">${vo.tel}</div>
-		<div class="col-1 border">${vo.email}</div>
-		<div class="col-1 border">${vo.gender}</div>
-		<div class="col-1 border">${vo.userDel}</div>
-		<div class="col-1 border">${vo.level}</div>
-		<div class="col-1 border"><input type="button" value="탈퇴" class="btn btn-danger" /></div>
+		<div class="col-1 border" style="padding-top:15px;">${curScrStartNo}</div>
+		<div class="col-1 border" style="padding-top:15px;">${vo.name}</div>
+		<div class="col-1 border" style="padding-top:15px;">${vo.mid}</div>
+		<div class="col-1 border" style="padding-top:15px;">${vo.nick}</div>
+		<div class="col-1 border" style="padding-top:15px;">${fn:replace(fn:substring(vo.birthday, 0, 10), '-', '')}</div>
+		<div class="col-1 border" style="padding-top:2px;">${vo.tel}</div>
+		<div class="col-2 border" style="padding-top:15px;">${vo.email}</div>
+		<div class="col-1 border" style="padding-top:15px;">${vo.gender}</div>
+		<div class="col-1 border" style="padding-top:15px;">${vo.userDel}</div>
+		<div class="col-1 border" style="padding-top:15px;">${vo.level}</div>
+		<c:if test="${vo.userDel == 'OK'}">
+			<div class="col-1 border"><input type="button" value="탈퇴" class="btn btn-danger btn-sm" /></div>
+		</c:if>
+		<c:if test="${vo.userDel != 'OK'}">
+			<div class="col-1 border" style="padding-top:10px;"><input type="button" value="탈퇴" class="btn btn-danger" disabled="disabled" /></div>
+		</c:if>
 	</div>
 	<c:set var="curScrStartNo" value="${curScrStartNo - 1}"/>
 	</c:forEach>

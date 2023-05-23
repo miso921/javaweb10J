@@ -65,7 +65,6 @@
 		<div class="col-1 border font-weight-bold">등급</div>
 		<div class="col-1 border font-weight-bold">비고</div>
 	</div>
-	</div>	
 	<c:forEach var="vo" items="${vos}" varStatus="st">
 	<div class="row hover text-center">
 		<div class="col-1 border">${curScrStartNo}</div>

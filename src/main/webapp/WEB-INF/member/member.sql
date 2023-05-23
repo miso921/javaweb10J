@@ -19,3 +19,5 @@ create table member (
 
 drop table member;
 desc member;
+
+select count(idx) as cnt from member;

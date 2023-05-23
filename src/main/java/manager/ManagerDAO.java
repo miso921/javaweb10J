@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import conn.GetConn;
+import member.MemberVO;
 
 public class ManagerDAO {
 	GetConn getConn = GetConn.getInstance();
@@ -46,7 +47,7 @@ public class ManagerDAO {
 	public int getTotRecCnt() {
 		int totRecCnt = 0;
 		try {
-			sql = "select count(idx) as cnt from eventInput";
+			sql = "select count(idx) as cnt from member";
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			rs.next();
@@ -105,6 +106,41 @@ public class ManagerDAO {
 			getConn.pstmtClose();
 		}
 		return res;
+	}
+
+	// 회원 전체 조회 처리
+	public ArrayList<MemberVO> getManagerMemberList(int statrIndexNo, int pageSize) {
+		ArrayList<MemberVO> vos = new ArrayList<>();
+		try {
+			sql = "select * from member order by idx desc limit ?,?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, statrIndexNo);
+			pstmt.setInt(2, pageSize);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				MemberVO vo = new MemberVO();
+				vo.setIdx(rs.getInt("idx"));
+				vo.setName(rs.getString("name"));
+				vo.setMid(rs.getString("mid"));
+				vo.setNick(rs.getString("nick"));
+				vo.setPwd(rs.getString("pwd"));
+				vo.setSalt(rs.getString("salt"));
+				vo.setBirthday(rs.getString("birthday"));
+				vo.setAddress(rs.getString("address"));
+				vo.setTel(rs.getString("tel"));
+				vo.setEmail(rs.getString("email"));
+				vo.setGender(rs.getString("gender"));
+				vo.setUserDel(rs.getString("userDel"));
+				vo.setLevel(rs.getInt("level"));
+				vos.add(vo);
+			}
+		} catch (SQLException e) {
+			System.out.println("SQL 오류(getManagerMemberList) : " + e.getMessage());
+		} finally {
+			getConn.rsClose();
+		}
+		return vos;
 	}
 	
 	

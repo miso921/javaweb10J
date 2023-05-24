@@ -44,50 +44,17 @@
 <div class='container'>
 <span><font id="work1" size="5em">추천 활동</font></span>
 <span id="work2"><a href="#" style="color: #676a59; font-size: 1em;"><b>활동 전체보기 ></b></a></span>
-  <div class="card-columns">
-    <div class="card" style="width: 300px; height: 350px;">
-    	<img src="${ctp}/images/event/${photo[0]}" width="294px" height="220px" />
-      <div class="card-body text-left">
-        <span class="card-text">${vo.eventName}</span>
-        <br /><font size="3em">2023.05.31</font>
-      </div>
-    </div>
-    <div class="card" style="width: 300px; height: 350px;">
-    	<img src="images/umb.png" width="296px" height="220px"/>
-      <div class="card-body text-left">
-        <span class="card-text">아이들을 위한 안전우산 만들기<br />봉사활동</span>
-        <br /><font size="3em">2023.05.15 외 43회</font>
-      </div>
-    </div>
-    <div class="card" style="width: 300px; height: 350px;">
-    	<img src="images/pic.jpg" width="295px" height="220px"/>
-      <div class="card-body text-left">
-        <span class="card-text">세계피자월드컵 2위 레시피의<br />나폴리피자 클래스</span>
-        <br /><font size="3em">2023.05.31</font>
-      </div>
-    </div>
-    <div class="card" style="width: 300px; height: 350px;">
-    	<img src="images/pizza.jpg" width="295px" height="220px"/>
-      <div class="card-body text-left">
-        <span class="card-text">세계피자월드컵 1위 레시피의<br />나폴리피자 클래스</span>
-        <br /><font size="3em">2023.05.31</font>
-      </div>
-    </div>
-    <div class="card" style="width: 300px; height: 350px;">
-    	<img src="images/pizza.jpg" width="295px" height="220px"/>
-      <div class="card-body text-left">
-        <span class="card-text">세계피자월드컵 4위 레시피의<br />나폴리피자 클래스</span>
-        <br /><font size="3em">2023.05.31</font>
-      </div>
-    </div>
-    <div class="card" style="width: 300px; height: 350px;">
-    	<img src="images/pizza.jpg" width="295px" height="220px"/>
-      <div class="card-body text-left">
-        <span class="card-text">세계피자월드컵 5위 레시피의<br />나폴리피자 클래스</span>
-        <br /><font size="3em">2023.05.31</font>
-      </div>
-    </div>
-  </div>
+	<c:forEach var="vo" items="${vos}" varStatus="st">
+	  <div class="card-columns">
+	    <div class="card" style="width: 300px; height: 350px;">
+	    	<img src="${ctp}/images/event/${vo.photo[0]}" width="294px" height="220px" />
+	      <div class="card-body text-left">
+	        <span class="card-text">${vo.eventName}</span>
+	        <br /><font size="3em">${vo. }</font>
+	      </div>
+	   	</div>
+	  </div>
+  </c:forEach>
 </div>
 <p><br /></p>
 <jsp:include page="/include/footer.jsp" />

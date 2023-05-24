@@ -16,12 +16,7 @@
 	    font-style: normal;
 		}
 		/* reset */
-		html,body{width:100%;height:100%;}
-		body{position:relative;color:#000;font-family:'Pretendard-Regular';}
-		
-		/* layout */
-		#container{position:absolute;top:0px;bottom:0px;width:100%;}
-		#content{position:absolute;top:0;bottom:0;left:440px;right:0;padding:10px;overflow:auto;width:100%;}
+		body{font-family:'Pretendard-Regular';}
 	</style>
 	<script>
 		'use strict';
@@ -66,7 +61,6 @@
 	</script>
 </head>
 <body>
-<jsp:include page="/include/managerMainMenu.jsp" />
 <p><br /></p>
 <div class="container">
 	<div id="content">

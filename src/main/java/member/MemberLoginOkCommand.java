@@ -33,7 +33,6 @@ public class MemberLoginOkCommand implements MemberInterface {
 		
 		SecurityUtil security = new SecurityUtil();
 		pwd = security.encryptSHA256(pwd);
-		
 		if(!pwd.equals(vo.getPwd())) {
 //			request.setAttribute("msg", "비밀번호를 확인하세요!");
 //			request.setAttribute("url", request.getContextPath()+"/Login.lo");

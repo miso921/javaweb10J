@@ -135,19 +135,20 @@ public class MemberDAO {
 	}
 
 	// 회원정보 수정 처리
-	public int getMemberUpdateOk(MemberVO vo) {
+	public int setMemberUpdateOk(MemberVO vo) {
 		int res = 0;
 		try {
-			sql = "update member set name=?, nick=?, birthday=?, address=?,"
+			sql = "update member set name=?, birthday=?, address=?,"
 					+ "tel=?, email=?, gender=? where mid=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, vo.getName());
-			pstmt.setString(2, vo.getNick());
-			pstmt.setString(3, vo.getBirthday());
-			pstmt.setString(4, vo.getAddress());
-			pstmt.setString(5, vo.getTel());
-			pstmt.setString(6, vo.getEmail());
-			pstmt.setString(7, vo.getGender());
+			pstmt.setString(2, vo.getBirthday());
+			pstmt.setString(3, vo.getAddress());
+			pstmt.setString(4, vo.getTel());
+			pstmt.setString(5, vo.getEmail());
+			pstmt.setString(6, vo.getGender());
+			pstmt.setString(7, vo.getMid());
+			pstmt.executeLargeUpdate();
 			res = 1;
 		} catch (SQLException e) {
 			System.out.println("SQL 오류 : " + e.getMessage());
@@ -156,6 +157,25 @@ public class MemberDAO {
 		}
 		return res;
 	}
+
+	// 비밀번호 수정 저장 처리
+	public int setMemberPwdUpdateOk(String mid, String newPwd) {
+		int res = 0;
+		try {
+			sql = "update member set pwd = ? where mid=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, newPwd);
+			pstmt.setString(2, mid);
+			pstmt.executeUpdate();
+			res = 1;
+		} catch (SQLException e) {
+			System.out.println("SQL 오류(setMemberPwdUpdateOk) : " + e.getMessage());
+		} finally {
+			getConn.pstmtClose();
+		}
+		return res;
+	}
+
 
 	
 	

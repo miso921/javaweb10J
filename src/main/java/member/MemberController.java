@@ -86,6 +86,14 @@ public class MemberController extends HttpServlet {
 		else if(com.equals("/MemberMypageMain")) {
 			viewPage += "/memberMypageMain.jsp";
 		}	
+		else if(com.equals("/MemberMypageLeft")) {
+			viewPage += "/memberMypageLeft.jsp";
+		}	
+		else if(com.equals("/MemberMypageContent")) {
+			command = new MemberMypageContentCommand();
+			command.execute(request, response);
+			viewPage += "/memberMypageContent.jsp";
+		}	
 		else if(com.equals("/MemberMypageInfo")) {
 			viewPage += "/memberMypageInfo.jsp";
 		}	
@@ -94,13 +102,29 @@ public class MemberController extends HttpServlet {
 			command.execute(request, response);
 			viewPage = "/include/message.jsp";
 		}	
-		else if(com.equals("/MemberUpdate")) {
-			command = new MemberUpdateCommand();
+		else if(com.equals("/MemberPwdCheckForm")) {
+			viewPage += "/memberPwdCheckForm.jsp";
+		}	
+		else if(com.equals("/MemberPwdCheckOk")) {
+			command = new MemberPwdCheckOkCommand();
 			command.execute(request, response);
-			viewPage = "/memberUpdate.jsp";
+			viewPage = "/include/message.jsp";
+		}	
+		else if(com.equals("/MemberUpdate")) {
+			command = new MemberUpdateCommand(); 
+			command.execute(request, response);
+			viewPage += "/memberUpdate.jsp";
 		}	
 		else if(com.equals("/MemberUpdateOk")) {
 			command = new MemberUpdateOkCommand();
+			command.execute(request, response);
+			viewPage = "/include/message.jsp";
+		}	
+		else if(com.equals("/MemberPwdUpdate")) {
+			viewPage += "/memberPwdUpdate.jsp";
+		}	
+		else if(com.equals("/MemberPwdUpdateOk")) {
+			command = new MemberPwdUpdateOkCommand();
 			command.execute(request, response);
 			viewPage = "/include/message.jsp";
 		}	

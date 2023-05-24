@@ -1,8 +1,7 @@
 <!-- nav.jsp -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
 <c:set var="ctp" value="${pageContext.request.contextPath}"/>
 <style>
 	@font-face {
@@ -27,15 +26,12 @@
 		text-decoration: none;
 		color: red;
 	}
-/* 	#navbar-brand {
+	#navbar-brand {
 		justify-content: flex-start;
 	}
 	#n2 {
 		justify-content: flex-end;
-	} */
-	#n1, #n2, #n3 {
-		justify-content: center;
-	}
+	} 
 </style>
 	<nav class="navbar navbar-expand-sm navbar-light sticky-top">
 		<!-- Brand -->
@@ -44,10 +40,10 @@
 		</div>
 		<!-- Links -->
 		<div id="nb2">
-			<ul class="navbar-nav">
+			<ul class="navbar-nav" id="ul1">
 				<!-- Dropdown -->
 				<li class="nav-item dropdown">
-					<li class="nav-item justify-content-center">
+					<li class="nav-item">
 						<a class="nav-link" id="n1" href="${ctp}/MemberEventList.me" id="nb1">활동</a>
 					</li>
 						<li class="nav-item">
@@ -59,7 +55,7 @@
 			</ul>
 		</div>
 		<div>
-			<ul class="navbar-nav">
+			<ul class="navbar-nav" id="ul2">
 				<li class="nav-item">
 					<a class="nav-link" id="n4" href="#"><i class="fa fa-search"></i></a>
 				</li>
@@ -73,12 +69,12 @@
 						<a class="nav-link" href="${ctp}/MemberLogout.me">로그아웃</a>
 					</li>
 					<div>
-						<a href="MemberMypageMain.me" id="sMid"><font color="white;">${sMid}(${sNick})</font></a>님, 로그인 중
+						<a href="${ctp}/MemberMypageMain.me" id="sMid"><font color="white;">${sMid}(${sNick})</font></a>님, 로그인 중
 					</div>
 					</c:if>
 					<c:if test="${sLevel == 0}">
 						<li class="nav-item">
-							<a class="nav-link" href="${ctp}/ManagerMain.ma">관리자메뉴</a>
+							<a class="nav-link" href="${ctp}/ManagerMain.ma"><i class="fa-solid fa-user-gear"></i></a>
 						</li>
 					</c:if>
 			</ul>

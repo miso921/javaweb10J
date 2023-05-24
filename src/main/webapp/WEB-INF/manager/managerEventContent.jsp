@@ -10,7 +10,6 @@
 	<jsp:include page="/include/bs4.jsp" />
 </head>
 <body>
-<jsp:include page="/include/header.jsp" />
 <div class='container'>
 	<p><br /></p>
 	<h2><b>행 사 정 보</b></h2><br />
@@ -49,6 +48,5 @@
 	</div>
 </div>
 <p><br /></p>
-<jsp:include page="/include/footer.jsp" />
 </body>
 </html>

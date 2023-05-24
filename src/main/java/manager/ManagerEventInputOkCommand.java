@@ -13,6 +13,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 public class ManagerEventInputOkCommand implements ManagerInterface {
 
+	@SuppressWarnings("rawtypes")
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String realPath = request.getServletContext().getRealPath("/images/event");
@@ -21,12 +22,6 @@ public class ManagerEventInputOkCommand implements ManagerInterface {
 		
 		// 파일 업로드처리(객체가 생성되면서 파일이 업로드처리된다.)
 		MultipartRequest multipartRequest = new MultipartRequest(request, realPath, maxSize, encoding, new DefaultFileRenamePolicy());
-		
-		// 업로드된 파일의 정보 추출
-		Enumeration fileNames = multipartRequest.getFileNames();
-		String file = "";
-		String originalFileName = "";
-		String filesystemName = "";
 		
 		HttpSession session = request.getSession();
 		String mid = (String) session.getAttribute("sMid");
@@ -43,14 +38,20 @@ public class ManagerEventInputOkCommand implements ManagerInterface {
 		int money = multipartRequest.getParameter("money")==null ? 0 : Integer.parseInt(multipartRequest.getParameter("money"));
 		String photo = multipartRequest.getFilesystemName("photo")==null ? "" : multipartRequest.getFilesystemName("photo");
 		
+		// 업로드된 파일의 정보 추출
+		Enumeration fileNames = multipartRequest.getFileNames();
+		String file = "";
+		String originalFileName = "";
+		String filesystemName = "";
+		
 		while(fileNames.hasMoreElements()) {
 			file = (String) fileNames.nextElement();
 			
-			if(multipartRequest.getFilesystemName(file) != null) {
+			//if(multipartRequest.getFilesystemName(file) != null) {
 				originalFileName += multipartRequest.getOriginalFileName(file) + "/";
 				filesystemName += multipartRequest.getFilesystemName(file) + "/";
-				
-			}
+				System.out.println("통과...");
+			//}
 		}
 		originalFileName = originalFileName.substring(0, originalFileName.length()-1);
 		filesystemName = filesystemName.substring(0, filesystemName.length()-1);
@@ -63,8 +64,8 @@ public class ManagerEventInputOkCommand implements ManagerInterface {
 		vo.setPlace(place);
 		vo.setTarget(target);
 		vo.setMoney(money);
-		vo.setPhoto(photo);
-		
+		vo.setPhoto(filesystemName);
+		System.out.println("vo(photo) : " + vo);
 		ManagerDAO dao = new ManagerDAO(); 
 		int res = dao.setManagerEventInputOk(vo);
 		

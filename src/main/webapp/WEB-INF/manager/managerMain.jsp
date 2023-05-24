@@ -17,20 +17,11 @@
 	}
 	/* reset */
 	html,body{width:100%;height:100%;}
-	body{position:relative;color:#000;font-family:'Pretendard-Regular';}
-	
-	/* layout */
-	#container{position:absolute;top:0px;bottom:0px;width:100%;}
-	#aside{position:absolute;left:0;top:0;bottom:0;width:220px;padding:10px;overflow:auto;box-sizing:border-box;border-right:1px solid #ddd;background:#fff;}
-	#content{position:absolute;top:0;bottom:0;left:220px;right:0;padding:10px;overflow:auto;}
+	body{font-family:'Pretendard-Regular';}
 	</style>
+	<frameset cols="200px,*">
+		<frame src="${ctp}/ManagerLeft.ma" name="managerLeft" frameborder="0" />
+		<frame src="${ctp}/ManagerContent.ma" name="managerContent" frameborder="0" />
+	</frameset>
 </head>
-<body>
-	<div id="container">
-	<jsp:include page="/include/managerMainMenu.jsp" />
-		<div id="content" class="">
-			메인화면
-		</div><!-- //#content -->
-	</div><!-- //#container -->
-</body>
-</html>
+</html>	

@@ -23,6 +23,14 @@ public class ManagerController extends HttpServlet {
 		if(com.equals("/ManagerMain")) {
 			viewPage += "/managerMain.jsp";
 		}
+		else if(com.equals("/ManagerLeft")) {
+			viewPage += "/managerLeft.jsp";
+		}
+		else if(com.equals("/ManagerContent")) {
+			command = new ManagerContentCommand();
+			command.execute(request, response);
+			viewPage += "/managerContent.jsp";
+		}
 		else if(com.equals("/ManagerEventInput")) {
 			viewPage += "/managerEventInput.jsp";
 		}
@@ -39,9 +47,6 @@ public class ManagerController extends HttpServlet {
 		else if(com.equals("/ManagerEventContent")) {
 			viewPage += "/managerEventContent.jsp";
 		}
-//		else if(com.equals("/ManagerMemberList")) {
-//			viewPage += "/managerMemberList.jsp";
-//		}
 		else if(com.equals("/ManagerEventDelete")) {
 			command = new ManagerEventDeleteCommand();
 			command.execute(request, response);
@@ -51,6 +56,21 @@ public class ManagerController extends HttpServlet {
 			command = new ManagerMemberListCommand();
 			command.execute(request, response);
 			viewPage += "/managerMemberList.jsp";
+		}
+		else if(com.equals("/ManagerMemeberLevelChange")) {
+			command = new ManagerMemeberLevelChangeCommand();
+			command.execute(request, response);
+			return;
+		}
+		else if(com.equals("/ManagerMemeberLevelTotalChange")) {
+			command = new ManagerMemeberLevelTotalChangeCommand();
+			command.execute(request, response);
+			return;
+		}
+		else if(com.equals("/ManagerMemberDelete")) {
+			command = new ManagerMemberDeleteCommand();
+			command.execute(request, response);
+			return;
 		}
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 		dispatcher.forward(request, response);

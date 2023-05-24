@@ -143,6 +143,38 @@ public class ManagerDAO {
 		return vos;
 	}
 	
+	// 회원 등급 변경
+	public String setMemberLevelChange(int level, int idx) {
+		String res = "0";
+		try {
+			sql = "update member set level = ? where idx = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, idx);
+			pstmt.setInt(2, level);
+			pstmt.executeUpdate();
+			res = "1";
+		} catch (SQLException e) {
+			System.out.println("SQL 오류(setMemberLevelChange) : " + e.getMessage());
+		} finally {
+			getConn.pstmtClose();
+		}
+		return res;
+	}
+
+	// 회원 삭제 처리
+	public void setMemberDelete(int idx) {
+		try {
+			sql = "delete from member where idx = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, idx);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("SQL 오류(setMemberLevelChange) : " + e.getMessage());
+		} finally {
+			getConn.pstmtClose();
+		}
+	}
+	
 	
 	
 }

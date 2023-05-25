@@ -15,8 +15,8 @@ public class ManagerEventListCommand implements ManagerInterface {
 		
 		// 페이징 처리
 		int pag = request.getParameter("pag")== null ? 1 : Integer.parseInt(request.getParameter("pag"));
-		int pageSize = request.getParameter("pageSize")== null ? 5 : Integer.parseInt(request.getParameter("pageSize"));
-		int totRecCnt = dao.getTotRecCnt();
+		int pageSize = request.getParameter("pageSize")== null ? 20 : Integer.parseInt(request.getParameter("pageSize"));
+		int totRecCnt = dao.getTotRecCnt(2);
 		int totPage = (totRecCnt % pageSize) == 0 ? (totRecCnt / pageSize) : (totRecCnt / pageSize) + 1;
 		int startIndexNo = (pag - 1) * pageSize;
 		int curScrStartNo = totRecCnt - startIndexNo;

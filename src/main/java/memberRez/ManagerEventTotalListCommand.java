@@ -1,4 +1,4 @@
-package manager;
+package memberRez;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -7,18 +7,16 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import member.MemberVO;
-
-public class ManagerMemberListCommand implements ManagerInterface {
+public class ManagerEventTotalListCommand implements MemberRezInterface {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ManagerDAO dao = new ManagerDAO();
-		MemberVO vo = new MemberVO();
-		//페이징 처리
+		MemberRezDAO dao = new MemberRezDAO();
+		
+		// 페이징처리
 		int pag = request.getParameter("pag")== null ? 1 : Integer.parseInt(request.getParameter("pag"));
 		int pageSize = request.getParameter("pageSize")== null ? 5 : Integer.parseInt(request.getParameter("pageSize"));
-		int totRecCnt = dao.getTotRecCnt(1);
+		int totRecCnt = dao.getTotRecCnt();
 		int totPage = (totRecCnt % pageSize)==0 ? (totRecCnt / pageSize) : (totRecCnt / pageSize) + 1 ;
 		int startIndexNo = (pag - 1) * pageSize;
 		int curScrStartNo = totRecCnt - startIndexNo;
@@ -29,8 +27,7 @@ public class ManagerMemberListCommand implements ManagerInterface {
 		int lastBlock = (totPage - 1) / blockSize;
 		
 		// 지정된 페이지의 자료를 요청한 한 페이지 분량만큼 가져온다!
-		ArrayList<MemberVO> vos = dao.getManagerMemberList(startIndexNo, pageSize);
-		System.out.println("vos ; " + vos);
+		ArrayList<MemberRezVO> vos = dao.getMemberEventRezList(startIndexNo, pageSize);
 		request.setAttribute("vos", vos);
 		
 		request.setAttribute("pag", pag);
@@ -41,4 +38,5 @@ public class ManagerMemberListCommand implements ManagerInterface {
 		request.setAttribute("curBlock", curBlock);
 		request.setAttribute("lastBlock", lastBlock);
 	}
+
 }

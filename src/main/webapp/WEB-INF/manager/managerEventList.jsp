@@ -20,8 +20,8 @@
 	<script>
 		'use strict';
 		
-		if (${pag} > ${totPage}) location.href="${ctp}/ManagerEventList.ma?pag=${totPage}&pageSize=${pageSize}";
 		function pageCheck() {
+			if (${pag} > ${totPage}) location.href="${ctp}/ManagerEventList.ma?pag=${totPage}&pageSize=${pageSize}";
 			let pageSize = $("#pageSize").val();
 			location.href = "${ctp}/ManagerEventList.ma?pag=${Pag}&pageSize="+pageSize;
 		}

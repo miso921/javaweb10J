@@ -51,9 +51,12 @@
   		</div>
   		<div class="card-body m-2 p-1">
   			<a href="${ctp}/ManagerEventList.ma" target="managerContent"><font size="3em" color="black">행사목록</font></a>
-	  		</div>
+	  	</div>
+  		<div class="card-body m-2 p-1">
+  			<a href="${ctp}/ManagerEventTotalList.mer" target="managerContent"><font size="3em" color="black">예약현황</font></a>
 	  	</div>
 	  </div>
+  </div>
 </div>
 </body>
 <p><br /></p>

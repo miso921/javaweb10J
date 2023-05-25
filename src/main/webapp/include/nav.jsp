@@ -1,7 +1,7 @@
 <!-- nav.jsp -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
 <c:set var="ctp" value="${pageContext.request.contextPath}"/>
 <style>
 	@font-face {
@@ -69,7 +69,7 @@
 						<a class="nav-link" href="${ctp}/MemberLogout.me">로그아웃</a>
 					</li>
 					<div>
-						<a href="${ctp}/MemberMypageMain.me" id="sMid"><font color="white;">${sMid}(${sNick})</font></a>님, 로그인 중
+						<a href="${ctp}/MemberMypageMain.me" id="sMid"><font color="white;">${sMid}(${sNick})</font></a>님
 					</div>
 					</c:if>
 					<c:if test="${sLevel == 0}">

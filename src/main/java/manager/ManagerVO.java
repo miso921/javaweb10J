@@ -5,11 +5,11 @@ public class ManagerVO {
 	private String part;
 	private String eventName;
 	private String eTime;
-	private int people;
-	private int peopleNum;
+	private String people;
+	private String peopleNum;
 	private String place;
 	private String target;
-	private int money;
+	private String money;
 	private String photo;
 	
 	private String eDate;
@@ -38,16 +38,16 @@ public class ManagerVO {
 	public void seteTime(String eTime) {
 		this.eTime = eTime;
 	}
-	public int getPeople() {
+	public String getPeople() {
 		return people;
 	}
-	public void setPeople(int people) {
+	public void setPeople(String people) {
 		this.people = people;
 	}
-	public int getPeopleNum() {
+	public String getPeopleNum() {
 		return peopleNum;
 	}
-	public void setPeopleNum(int peopleNum) {
+	public void setPeopleNum(String peopleNum) {
 		this.peopleNum = peopleNum;
 	}
 	public String getPlace() {
@@ -62,10 +62,10 @@ public class ManagerVO {
 	public void setTarget(String target) {
 		this.target = target;
 	}
-	public int getMoney() {
+	public String getMoney() {
 		return money;
 	}
-	public void setMoney(int money) {
+	public void setMoney(String money) {
 		this.money = money;
 	}
 	public String getPhoto() {
@@ -87,5 +87,4 @@ public class ManagerVO {
 				+ people + ", peopleNum=" + peopleNum + ", place=" + place + ", target=" + target + ", money=" + money
 				+ ", photo=" + photo + ", eDate=" + eDate + "]";
 	}
-	
 }

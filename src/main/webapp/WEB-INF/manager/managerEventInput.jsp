@@ -103,20 +103,20 @@
 				<input type="text" name="eTime" id="eTime" required class="form-control mb-2" />
 			</div>
 			<div>
-				모집정원&nbsp;<font color="red">(숫자만 입력)</font><br />
-				<input type="number" name="people" id="people" required class="form-control mb-2" />
+				모집정원<br />
+				<input type="text" name="people" id="people" required class="form-control mb-2" />
 			</div>
 			<div>
 				장소<br />
-				<input type="text" name="place" id="place" required class="form-control mb-2" />
+				<input type="text" name="place" id="place" class="form-control mb-2" />
 			</div>
 			<div>
 				참여 대상<br />
 				<input type="text" name="target" id="target" class="form-control mb-2" />
 			</div>
 			<div>
-				참가비&nbsp;<font color="red">(숫자만 입력)</font><br />
-				<input type="number" name="money" id="money" class="form-control mb-2" />
+				참가비<br />
+				<input type="text" name="money" id="money" class="form-control mb-2" />
 			</div>
 <!-- 			<div>
 				행사사진 / 상세내용 / 오시는길 사진&nbsp;<font color="red">(사진 3장을 선택하세요!)</font><br />

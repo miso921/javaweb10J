@@ -33,9 +33,7 @@
 			text-decoration: none;
 			color: #cfdd8e;
 		}
-		.card-body a:hover {
-		
-		}
+		#en a:hover, #ed a:hover {text-decoration:none;}
 	</style>
 </head>
 <body>
@@ -46,7 +44,7 @@
 <span><font id="work1" size="5em">추천 활동</font></span>
 <span id="work2"><a href="#" style="color: #676a59; font-size: 1em;"><b>활동 전체보기 ></b></a></span>
   <c:set var="cnt" value="0"/>
-  <c:forEach var="i"  begin="1" end="2">
+  <c:forEach var="i"  begin="1" end="3">
 	  <div class="row">
 	    <%-- <c:forEach begin="1" end="3" var="vo" items="${vos}"> --%>
 	    <c:forEach begin="1" end="3">
@@ -61,16 +59,21 @@
 				      </div>
 				    </div>
 			    </div> --%>
-			    <div class="border" style="width:300px; height: 350px;">
-			      <c:set var="photo" value="${fn:split(vos[cnt].photo,'/')}"/>
-			    	<img src="${ctp}/images/event/${photo[0]}" width="294px" height="220px" />
-			      <div class="card-body text-left">
-			        <span class="card-text">${vos[cnt].eventName}</span>
-			        <br /><font size="3em">${vos[cnt].eDate}</font>
-			      </div>
-			    </div>
-			  </div>
-			  <c:set var="cnt" value="${cnt + 1}"/>
+				    <a href="${ctp}/MemberEventContent.me?idx=${vos[cnt].idx}">
+					    <div class="border" style="width:300px; height: 350px;">
+					      <c:set var="photo" value="${fn:split(vos[cnt].photo,'/')}"/>
+					      <c:if test="${empty photo[2]}"><img src ="${ctp}/images/event/${photo[1]}" width="298px" height="220px"></c:if>
+					      <c:if test="${!empty photo[2]}"><img src ="${ctp}/images/event/${photo[2]}" width="298px" height="220px"></c:if>
+					      <%-- <c:if test="${empty photo[2]}"><img src="${ctp}/images/111.jpg" width="294px" height="220px" /></c:if>
+					      <c:if test="${!empty photo[2]}"><img src="${ctp}/images/event/${photo[2]}" width="294px" height="220px" /></c:if> --%>
+					      <div class="card-body text-left">
+					        <span id="en" class="card-text"><font color="black">${vos[cnt].eventName}</font></span>
+					        <br /><font size="3em" color="black" id="ed">${fn:substring(vos[cnt].eDate,0,10)}</font>
+					      </div>
+					    </div>
+				    </a>
+				  </div>
+				  <c:set var="cnt" value="${cnt + 1}"/>
 		  </c:forEach>
 	  </div>
   </c:forEach>

@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import conn.GetConn;
+import manager.ManagerVO;
 
 
 public class MemberDAO {
@@ -174,6 +175,35 @@ public class MemberDAO {
 			getConn.pstmtClose();
 		}
 		return res;
+	}
+
+	// 회원이 보는 행사 상세정보에 출력할 정보 가져가기
+	public ManagerVO getMemberEventContent(int idx) {
+		ManagerVO vo = new ManagerVO();
+		try {
+			sql = "select ei.*, ed.eDate from eventInput ei, eventDate ed where ei.idx=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, idx);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				vo.setIdx(rs.getInt("idx"));
+				vo.setPart(rs.getString("part"));
+				vo.setEventName(rs.getString("eventName"));
+				vo.seteTime(rs.getString("eTime"));
+				vo.setPeople(rs.getString("people"));
+				vo.setPeopleNum(rs.getString("peopleNum"));
+				vo.setPlace(rs.getString("place"));
+				vo.setTarget(rs.getString("target"));
+				vo.setMoney(rs.getString("money"));
+				vo.setPhoto(rs.getString("photo"));
+			}
+		} catch (SQLException e) {
+			System.out.println("SQL 오류(setMemberEventContent) : " + e.getMessage());
+		} finally {
+			getConn.rsClose();
+		}
+		return vo;
 	}
 
 

@@ -32,10 +32,10 @@ public class ManagerEventInputOkCommand implements ManagerInterface {
 		String part = multipartRequest.getParameter("part")==null ? "" : multipartRequest.getParameter("part");
 		String eventName = multipartRequest.getParameter("eventName")==null ? "" : multipartRequest.getParameter("eventName");
 		String eTime = multipartRequest.getParameter("eTime")==null ? "" : multipartRequest.getParameter("eTime");
-		int people = multipartRequest.getParameter("people")==null ? 0 : Integer.parseInt(multipartRequest.getParameter("people"));
+		String people = multipartRequest.getParameter("people")==null ? "" : multipartRequest.getParameter("people");
 		String place = multipartRequest.getParameter("place")==null ? "" : multipartRequest.getParameter("place");
 		String target = multipartRequest.getParameter("target")==null ? "" : multipartRequest.getParameter("target");
-		int money = multipartRequest.getParameter("money")==null ? 0 : Integer.parseInt(multipartRequest.getParameter("money"));
+		String money = multipartRequest.getParameter("money")==null ? "" : multipartRequest.getParameter("money");
 		String photo = multipartRequest.getFilesystemName("photo")==null ? "" : multipartRequest.getFilesystemName("photo");
 		
 		// 업로드된 파일의 정보 추출

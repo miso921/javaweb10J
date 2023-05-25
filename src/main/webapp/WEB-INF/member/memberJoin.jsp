@@ -181,11 +181,13 @@
     		myform.mid.focus();
     		return false;
     	}
+    	
     	else if(!regPwd.test(pwd)) {
         alert("비밀번호는 1개이상의 문자와 특수문자 조합의 6~24 자리로 작성해주세요.");
         myform.pwd.focus();
         return false;
       }
+    	
       else if(!regNick.test(nick)) {
         alert("닉네임은 한글만 사용가능합니다.");
         myform.nickName.focus();
@@ -281,6 +283,7 @@
     		$("#pwdError").show();
     		submitFlag = 1;
     	}
+    	
     }
 
     

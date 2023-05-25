@@ -128,6 +128,14 @@ public class MemberController extends HttpServlet {
 			command.execute(request, response);
 			viewPage = "/include/message.jsp";
 		}	
+		else if(com.equals("/MemberEventContent")) {
+			command = new MemberEventContentCommand(); 
+			command.execute(request, response);
+			viewPage += "/memberEventContent.jsp";
+		}	
+		else if(com.equals("/MemberActiveAll")) {
+			viewPage += "/memberActiveAll.jsp";
+		}	
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 		dispatcher.forward(request, response);
 	}

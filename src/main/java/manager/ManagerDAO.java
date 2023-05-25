@@ -28,10 +28,10 @@ public class ManagerDAO {
 			pstmt.setString(1, vo.getPart());
 			pstmt.setString(2, vo.getEventName());
 			pstmt.setString(3, vo.geteTime());
-			pstmt.setInt(4, vo.getPeople());
+			pstmt.setString(4, vo.getPeople());
 			pstmt.setString(5, vo.getPlace());
 			pstmt.setString(6, vo.getTarget());
-			pstmt.setInt(7, vo.getMoney());
+			pstmt.setString(7, vo.getMoney());
 			pstmt.setString(8, vo.getPhoto());
 			pstmt.executeUpdate();
 			res = 1;
@@ -44,10 +44,15 @@ public class ManagerDAO {
 	}
 
 	// 전체 레코드 건수 구하기
-	public int getTotRecCnt() {
+	public int getTotRecCnt(int flag) {
 		int totRecCnt = 0;
 		try {
-			sql = "select count(idx) as cnt from member";
+			if(flag == 1) {
+			  sql = "select count(idx) as cnt from member";
+			}
+			else if(flag == 2) {
+				sql = "select count(idx) as cnt from eventInput";
+			}
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			rs.next();
@@ -60,11 +65,12 @@ public class ManagerDAO {
 		return totRecCnt;
 	}
 
-	// 행사 전체 조회 처리
+	// 행사 전체 조회 처리(날짜등록 전인 모든 행사 조회)
 	public ArrayList<ManagerVO> getEventList(int startIndexNo, int pageSize) {
 		ArrayList<ManagerVO> vos = new ArrayList<>();
 		try {
-			sql = "select ei.*,ed.eDate from eventInput ei, eventDate ed where ei.eventName = ed.eventName order by idx desc limit ?,?";
+			sql = "select ei.*, ed.eDate from eventInput ei, eventDate ed where ei.eventName = ed.eventName "
+					+ "group by ei.eventName order by eDate desc limit ?,?";   // group by를 사용하면 중복건수를 제외하고 가져올 수 있다!!
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, startIndexNo);
 			pstmt.setInt(2, pageSize);
@@ -76,13 +82,15 @@ public class ManagerDAO {
 				vo.setPart(rs.getString("part"));
 				vo.setEventName(rs.getString("eventName"));
 				vo.seteTime(rs.getString("eTime"));
-				vo.setPeople(rs.getInt("people"));
+				vo.setPeople(rs.getString("people"));
+				vo.setPeopleNum(rs.getString("peopleNum"));
 				vo.setPlace(rs.getString("place"));
 				vo.setTarget(rs.getString("target"));
-				vo.setMoney(rs.getInt("money"));
+				vo.setMoney(rs.getString("money"));
 				vo.setPhoto(rs.getString("photo"));
 				
 				vo.seteDate(rs.getString("eDate"));
+				
 				vos.add(vo); // vos에 데이터 추가!
 			}
 		} catch (SQLException e) {
@@ -92,6 +100,7 @@ public class ManagerDAO {
 		}
 		return vos;
 	}
+	
 
 	// 행사정보 삭제 처리
 	public int setManagerEventDelete(int idx) {
@@ -171,7 +180,7 @@ public class ManagerDAO {
 			pstmt.setInt(1, idx);
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
-			System.out.println("SQL 오류(setMemberLevelChange) : " + e.getMessage());
+			System.out.println("SQL 오류(setMemberDelete) : " + e.getMessage());
 		} finally {
 			getConn.pstmtClose();
 		}
@@ -190,7 +199,69 @@ public class ManagerDAO {
 				vos.add(eventName);
 			}
 		} catch (SQLException e) {
-			System.out.println("SQL 오류(getManagerMemberList) : " + e.getMessage());
+			System.out.println("SQL 오류(getEventNameList) : " + e.getMessage());
+		} finally {
+			getConn.rsClose();
+		}
+		return vos;
+	}
+
+	public ManagerVO getEventContent(int idx) {
+		ManagerVO vo = new ManagerVO();
+		try {
+			sql = "select * from eventInput where idx = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, idx);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				vo.setIdx(rs.getInt("idx"));
+				vo.setPart(rs.getString("part"));
+				vo.setEventName(rs.getString("eventName"));
+				vo.seteTime(rs.getString("eTime"));
+				vo.setPeople(rs.getString("people"));
+				vo.setPeopleNum(rs.getString("peopleNum"));
+				vo.setPlace(rs.getString("place"));
+				vo.setTarget(rs.getString("target"));
+				vo.setMoney(rs.getString("money"));
+				vo.setPhoto(rs.getString("photo"));
+			}
+		} catch (SQLException e) {
+			System.out.println("SQL 오류(getEventContent) : " + e.getMessage());
+		} finally {
+			getConn.rsClose();
+		}
+		return vo;
+	}
+
+	// 예약 화면에서 행사명의 시간과 날짜 가져오기
+	public ArrayList<ManagerVO> getEventNameList(int idx) {
+		ArrayList<ManagerVO> vos = new ArrayList<>();
+		try {
+			sql = "select ei.*,ed.eDate from eventInput ei, eventDate ed where ei.eventName= ed.eventName and ei.idx=? order by eDate desc";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, idx);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				ManagerVO vo = new ManagerVO();
+				vo.setIdx(rs.getInt("idx"));
+				vo.setPart(rs.getString("part"));
+				vo.setEventName(rs.getString("eventName"));
+				vo.seteTime(rs.getString("eTime"));
+				vo.setPeople(rs.getString("people"));
+				vo.setPeopleNum(rs.getString("peopleNum"));
+				vo.setPlace(rs.getString("place"));
+				vo.setTarget(rs.getString("target"));
+				vo.setMoney(rs.getString("money"));
+				vo.setPhoto(rs.getString("photo"));
+				
+				vo.seteDate(rs.getString("eDate"));
+				
+				vos.add(vo);
+			}
+		} catch (SQLException e) {
+			System.out.println("SQL 오류(getEventList) : " + e.getMessage());
 		} finally {
 			getConn.rsClose();
 		}

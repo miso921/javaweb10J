@@ -14,7 +14,8 @@ create table member (
 	gender   varchar(5) default '미선택',        /* 회원의 성별 */ 
 	userDel  char(2) default 'NO',             /* 탈퇴 신청 유무 */
 	level		 int default 1,                    /* 0:관리자 1:회원 */
-	primary key(idx)
+	primary key(idx),
+	unique key(mid)
 );  
 
 drop table member;

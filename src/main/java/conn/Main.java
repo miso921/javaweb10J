@@ -21,12 +21,13 @@ public class Main extends HttpServlet {
 		
 		ManagerDAO dao = new ManagerDAO();
 		
-		ArrayList<ManagerVO> vos = dao.getEventList(0, 6);
+		ArrayList<ManagerVO> vos = dao.getEventList(0, 9);
 		
 		
 		request.setAttribute("vos", vos);
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
-		dispatcher.forward(request, response);
+		dispatcher.forward(request, response); 
+		// 컨트롤러가 없기 때문에 command객체에서 바로 dispatcher로 경로이동!!!
 	}
 }

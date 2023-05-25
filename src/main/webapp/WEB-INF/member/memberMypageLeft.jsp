@@ -35,7 +35,7 @@
   <hr/>
   <p><a href="${ctp}/" target="_top" style="color:black"><i class="fa fa-home"></i></a></p>
   <hr/>
-  <p><a href="${ctp}/MemberMypageRez.me" target="memberMypageContent"><font size="4em;" color="black">내예약확인</font></a></p>
+  <p><a href="${ctp}/MemberEventRezList.mer" target="memberMypageContent"><font size="4em;" color="black">내예약확인</font></a></p>
   <hr/>
   <div class="card">
   	<div class="card-header m-0 p-2">

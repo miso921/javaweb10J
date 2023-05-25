@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
 <c:set var="ctp" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html>
@@ -32,7 +33,7 @@
 <div class="text-center card-hover" id="accordion">
   <h2><a href="${ctp}/MemberMypageMain.me"><font color="black">나의페이지</font></a></h2>
   <hr/>
-  <p><a href="${ctp}/" target="_top"><font size="4em;" color="black">홈</font></a></p>
+  <p><a href="${ctp}/" target="_top" style="color:black"><i class="fa fa-home"></i></a></p>
   <hr/>
   <p><a href="${ctp}/MemberMypageRez.me" target="memberMypageContent"><font size="4em;" color="black">내예약확인</font></a></p>
   <hr/>

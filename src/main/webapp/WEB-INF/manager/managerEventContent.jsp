@@ -8,11 +8,40 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>managerEventContent.jsp</title>
 	<jsp:include page="/include/bs4.jsp" />
+	<style>
+		@font-face {
+	    font-family: 'Pretendard-Regular';
+	    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+	    font-weight: 400;
+	    font-style: normal;
+		}
+		body{font-family:'Pretendard-Regular';}
+	</style>
 </head>
 <body>
 <div class='container'>
-	<p><br /></p>
-	<h2><b>행 사 정 보</b></h2><br />
+<p><br /></p>
+	<h2 class="text-center"><b>행 사 정 보</b></h2><br />
+	<div class="table-responsive">
+	  <table class="table table-bordered">
+	    <thead>
+	      <tr>
+	        <th>분류</th>
+	        <th>행사명</th>
+	        <th>아이디</th>
+	        <th>별명</th>
+	        <th>생년월일</th>
+	        <th>전화번호</th>
+	        <th>이메일</th>
+	        <th>성별</th>
+	        <th>탈퇴신청</th>
+	        <th>등급</th>
+	        <th>비고</th>
+	      </tr>
+	    </thead>
+	    <tbody>
+</div>	    
+	====
 	<div class="row border border-dark">
 		<div class="col">${vo.photo[0]}</div>
 	</div>

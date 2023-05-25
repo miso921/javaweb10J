@@ -12,6 +12,8 @@ public class ManagerVO {
 	private int money;
 	private String photo;
 	
+	private String eDate;
+	
 	public int getIdx() {
 		return idx;
 	}
@@ -72,11 +74,18 @@ public class ManagerVO {
 	public void setPhoto(String photo) {
 		this.photo = photo;
 	}
+	public String geteDate() {
+		return eDate;
+	}
+	public void seteDate(String eDate) {
+		this.eDate = eDate;
+	}
 	
 	@Override
 	public String toString() {
 		return "ManagerVO [idx=" + idx + ", part=" + part + ", eventName=" + eventName + ", eTime=" + eTime + ", people="
 				+ people + ", peopleNum=" + peopleNum + ", place=" + place + ", target=" + target + ", money=" + money
-				+ ", photo=" + photo + "]";
+				+ ", photo=" + photo + ", eDate=" + eDate + "]";
 	}
+	
 }

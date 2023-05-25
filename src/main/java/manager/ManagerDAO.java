@@ -64,7 +64,7 @@ public class ManagerDAO {
 	public ArrayList<ManagerVO> getEventList(int startIndexNo, int pageSize) {
 		ArrayList<ManagerVO> vos = new ArrayList<>();
 		try {
-			sql = "select * from eventInput order by idx desc limit ?,?";
+			sql = "select ei.*,ed.eDate from eventInput ei, eventDate ed where ei.eventName = ed.eventName order by idx desc limit ?,?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, startIndexNo);
 			pstmt.setInt(2, pageSize);
@@ -81,6 +81,8 @@ public class ManagerDAO {
 				vo.setTarget(rs.getString("target"));
 				vo.setMoney(rs.getInt("money"));
 				vo.setPhoto(rs.getString("photo"));
+				
+				vo.seteDate(rs.getString("eDate"));
 				vos.add(vo); // vos에 데이터 추가!
 			}
 		} catch (SQLException e) {
@@ -173,6 +175,26 @@ public class ManagerDAO {
 		} finally {
 			getConn.pstmtClose();
 		}
+	}
+
+	// 이벤트 이름만 모두 가져오기
+	public ArrayList<String> getEventNameList() {
+		ArrayList<String> vos = new ArrayList<>();
+		try {
+			sql = "select eventName from eventInput order by eventName";
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				String eventName = rs.getString("name");
+				vos.add(eventName);
+			}
+		} catch (SQLException e) {
+			System.out.println("SQL 오류(getManagerMemberList) : " + e.getMessage());
+		} finally {
+			getConn.rsClose();
+		}
+		return vos;
 	}
 	
 	

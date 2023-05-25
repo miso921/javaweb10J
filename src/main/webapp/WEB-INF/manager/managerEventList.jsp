@@ -15,7 +15,6 @@
 	    font-weight: 400;
 	    font-style: normal;
 		}
-		/* reset */
 		body{font-family:'Pretendard-Regular';}
 	</style>
 	<script>
@@ -75,6 +74,7 @@
         <div class="col-1 border text-center">${vo.money}원</div>
         <div class="col-1 border text-center">
           <input type="button" value="삭제" onclick="deleteCheck(${vo.idx})" class="btn btn-danger btn-sm" />
+          <input type="button" value="날짜등록" onclick="location.href='${ctp}/EventDateInput.mae?eventName=${vo.eventName}';" class="btn btn-success btn-sm" />
         </div>
       </div>
       <c:set var="curScrStartNo" value="${curScrStartNo - 1}"/>

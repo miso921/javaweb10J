@@ -71,7 +71,7 @@ public class ManagerEventInputOkCommand implements ManagerInterface {
 		
 		if(res == 1) {
 			request.setAttribute("msg", "행사가 등록되었습니다!");
-			request.setAttribute("url", request.getContextPath()+"/ManagerMain.ma");
+			request.setAttribute("url", request.getContextPath()+"/ManagerContent.ma");
 			request.setAttribute("vo",vo);
 		}
 		else {

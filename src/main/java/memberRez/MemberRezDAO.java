@@ -43,7 +43,8 @@ public class MemberRezDAO {
 	public int setMemberRezCancle(int idx) {
 		int res = 0;
 		try {
-			sql = "delete from resvation where idx = ?";
+			sql = "delete from reservation where idx = ?";
+			sql = "delete from reservation re  where idx = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, idx);
 			pstmt.executeUpdate();

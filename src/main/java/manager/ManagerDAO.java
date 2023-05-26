@@ -23,7 +23,7 @@ public class ManagerDAO {
 	public int setManagerEventInputOk(ManagerVO vo) {
 		int res = 0;
 		try {
-			sql = "insert into eventInput values (default,?,?,?,?,default,?,?,?,?)";
+			sql = "insert into eventInput values (default,?,?,?,?,?,?,?,?)";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, vo.getPart());
 			pstmt.setString(2, vo.getEventName());
@@ -53,6 +53,10 @@ public class ManagerDAO {
 			else if(flag == 2) {
 				sql = "select count(idx) as cnt from eventInput";
 			}
+			else if(flag == 3) {
+				sql = "select count(distinct ei.idx) as cnt from eventDate ed, eventInput ei "
+						+ "where ed.eDate > now() and ed.eventName = ei.eventName";
+			}
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			rs.next();
@@ -65,12 +69,13 @@ public class ManagerDAO {
 		return totRecCnt;
 	}
 
-	// 행사 전체 조회 처리(날짜등록 전인 모든 행사 조회)
+	// 행사 전체 조회 처리(관리자 행사목록)
 	public ArrayList<ManagerVO> getEventList(int startIndexNo, int pageSize) {
 		ArrayList<ManagerVO> vos = new ArrayList<>();
 		try {
-			sql = "select ei.*, ed.eDate from eventInput ei, eventDate ed where ei.eventName = ed.eventName "
-					+ "group by ei.eventName order by eDate desc limit ?,?";   // group by를 사용하면 중복건수를 제외하고 가져올 수 있다!!
+//			sql = "select ei.*, ed.eDate from eventInput ei, eventDate ed where ei.eventName = ed.eventName and eDate > now() "
+//					+ "group by ei.eventName order by eDate desc limit ?,?";   // group by를 사용하면 중복건수를 제외하고 가져올 수 있다!!
+			sql = "select * from eventInput order by eDate desc limit ?,?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, startIndexNo);
 			pstmt.setInt(2, pageSize);
@@ -83,13 +88,12 @@ public class ManagerDAO {
 				vo.setEventName(rs.getString("eventName"));
 				vo.seteTime(rs.getString("eTime"));
 				vo.setPeople(rs.getString("people"));
-				vo.setPeopleNum(rs.getString("peopleNum"));
 				vo.setPlace(rs.getString("place"));
 				vo.setTarget(rs.getString("target"));
 				vo.setMoney(rs.getString("money"));
 				vo.setPhoto(rs.getString("photo"));
 				
-				vo.seteDate(rs.getString("eDate"));
+//				vo.seteDate(rs.getString("eDate"));
 				
 				vos.add(vo); // vos에 데이터 추가!
 			}
@@ -220,7 +224,6 @@ public class ManagerDAO {
 				vo.setEventName(rs.getString("eventName"));
 				vo.seteTime(rs.getString("eTime"));
 				vo.setPeople(rs.getString("people"));
-				vo.setPeopleNum(rs.getString("peopleNum"));
 				vo.setPlace(rs.getString("place"));
 				vo.setTarget(rs.getString("target"));
 				vo.setMoney(rs.getString("money"));
@@ -238,7 +241,8 @@ public class ManagerDAO {
 	public ArrayList<ManagerVO> getEventNameList(int idx) {
 		ArrayList<ManagerVO> vos = new ArrayList<>();
 		try {
-			sql = "select ei.*,ed.eDate from eventInput ei, eventDate ed where ei.eventName= ed.eventName and ei.idx=? order by eDate desc";
+			sql = "select ei.*,ed.eDate from eventInput ei, eventDate ed "
+					+ "where ei.eventName= ed.eventName and ei.idx=? order by eDate desc";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, idx);
 			rs = pstmt.executeQuery();
@@ -250,7 +254,6 @@ public class ManagerDAO {
 				vo.setEventName(rs.getString("eventName"));
 				vo.seteTime(rs.getString("eTime"));
 				vo.setPeople(rs.getString("people"));
-				vo.setPeopleNum(rs.getString("peopleNum"));
 				vo.setPlace(rs.getString("place"));
 				vo.setTarget(rs.getString("target"));
 				vo.setMoney(rs.getString("money"));

@@ -6,7 +6,6 @@ public class ManagerVO {
 	private String eventName;
 	private String eTime;
 	private String people;
-	private String peopleNum;
 	private String place;
 	private String target;
 	private String money;
@@ -44,12 +43,6 @@ public class ManagerVO {
 	public void setPeople(String people) {
 		this.people = people;
 	}
-	public String getPeopleNum() {
-		return peopleNum;
-	}
-	public void setPeopleNum(String peopleNum) {
-		this.peopleNum = peopleNum;
-	}
 	public String getPlace() {
 		return place;
 	}
@@ -84,7 +77,8 @@ public class ManagerVO {
 	@Override
 	public String toString() {
 		return "ManagerVO [idx=" + idx + ", part=" + part + ", eventName=" + eventName + ", eTime=" + eTime + ", people="
-				+ people + ", peopleNum=" + peopleNum + ", place=" + place + ", target=" + target + ", money=" + money
-				+ ", photo=" + photo + ", eDate=" + eDate + "]";
+				+ people + ", place=" + place + ", target=" + target + ", money=" + money + ", photo=" + photo + ", eDate="
+				+ eDate + "]";
 	}
+	
 }

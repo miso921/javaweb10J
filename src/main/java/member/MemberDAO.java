@@ -192,7 +192,6 @@ public class MemberDAO {
 				vo.setEventName(rs.getString("eventName"));
 				vo.seteTime(rs.getString("eTime"));
 				vo.setPeople(rs.getString("people"));
-				vo.setPeopleNum(rs.getString("peopleNum"));
 				vo.setPlace(rs.getString("place"));
 				vo.setTarget(rs.getString("target"));
 				vo.setMoney(rs.getString("money"));

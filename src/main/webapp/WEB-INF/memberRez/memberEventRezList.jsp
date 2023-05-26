@@ -11,12 +11,12 @@
 	<jsp:include page="/include/bs4.jsp" />
 	<style>
 		@font-face {
-	    font-family: 'Pretendard-Regular';
-	    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+	    font-family: 'SUITE-Regular';
+	    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2');
 	    font-weight: 400;
 	    font-style: normal;
 		}
-		body{font-family:'Pretendard-Regular';}
+		body{font-family:'SUITE-Regular';}
 	</style>
 	<script>
 		'use strict';
@@ -37,9 +37,14 @@
 					type  : "post",
 					url   : "${ctp}/MemberEventRezCancle.mer",
 					data  : {idx : idx},
-					success : function() {
-						alert("예약 취소가 완료되었습니다!");
-						location.reload();
+					success : function(res) {
+						if(res==1) {
+							alert("예약 취소가 완료되었습니다!");
+							location.reload();
+						}
+						else {
+							alert("예약 취소에 실패했습니다!");
+						}
 					},
 					error : function() {
 						alert("전송오류!");
@@ -49,10 +54,11 @@
 	</script>
 </head>
 <body>
+<p><br /></p>
 <div class="container">
 	<form name="myform">
 	    <br>
-	    <h2 class="text-center"><b>나 의 예 약 목 록</b></h2>
+	    <h2 class="text-center"><b>행 사 예 약 목 록</b></h2>
 	    <br>
 	    <div class="row borderless m-0 p-0">
 	      <div class="col mb-2">
@@ -90,7 +96,8 @@
 	    <div class="table-responsive">
 	      <table class="table table-bordered">
 	        <thead>
-	          <tr>
+	          <tr class="text-center">
+	            <th>전체선택</th>
 	            <th>번호</th>
 	            <th>행사명</th>
 	            <c:if test="${sLevel == 0}"><th>아이디</th></c:if>
@@ -98,26 +105,27 @@
 	            <th>예약시간</th>
 	            <th>예약인원</th>
 	            <th>신청날짜</th>
+	            <th>비고</th>
 	          </tr>
 	        </thead>
 	        <tbody>
 	          <c:forEach var="vo" items="${vos}" varStatus="st">
-	            <tr>
+	            <tr class="text-center">
 	              <td>
 	              	<input type="checkbox" class="chk" name="chk" value="${vo.idx}" /> &nbsp;
+	              </td>
+	              <td>
 	              	${curScrStartNo}
 	              </td>
 	              <td><a href="${ctp}/ManagerMemberContent.ma?idx=${vo.idx}&pag=${pag}$pageSize=${pageSize}" target="managerContent">${vo.eventName}</a></td>
 	              <c:if test="${sLevel == 0}"><td>${vo.mid}</td></c:if>
-	              <td>${vo.rDate}</td>
+	              <td>${fn:substring(vo.rDate,0,10)}</td>
 	              <td>${fn:substring(vo.rTime,0,10)}</td>
 	              <td>${vo.rPeopleNum}</td>
-	              <td>${vo.aplDate}</td>
-	              <td>
-	              </td>
-	                <td>
-	                  <input type="button" value="예약취소" onclick="cancleCheck(idx)" class="btn btn-danger">
-	                </td>
+	              <td>${fn:substring(vo.aplDate,0,10)}</td>
+                <td>
+                  <input type="button" value="예약취소" onclick="cancleCheck(${vo.idx})" class="btn btn-danger">
+                </td>
 	            </tr>
 	            <c:set var="curScrStartNo" value="${curScrStartNo - 1}"/>
 	          </c:forEach>	

@@ -10,12 +10,12 @@
 	<jsp:include page="/include/bs4.jsp" />
 	<style>
 		@font-face {
-	    font-family: 'Pretendard-Regular';
-	    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+	    font-family: 'SUITE-Regular';
+	    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2');
 	    font-weight: 400;
 	    font-style: normal;
 		}
-		body{font-family:'Pretendard-Regular';}
+		body{font-family:'SUITE-Regular';}
 	</style>
 	<script>
 		'use strict';
@@ -55,7 +55,6 @@
       <div class="col-3 border">행사명</div>
       <div class="col-1 border">시간</div>
       <div class="col-1 border">모집정원</div>
-      <div class="col-1 border">예약인원</div>
       <div class="col-1 border">장소</div>
       <div class="col-1 border">참여대상</div>
       <div class="col-1 border">참가비</div>
@@ -68,7 +67,6 @@
         <div class="col-3 border"><a href="${ctp}/ManagerEventContent.ma?idx=${vo.idx}&pag=${pag}&pageSize=${pageSize}" target="managerContent">${vo.eventName}</a></div>
         <div class="col-1 border text-center">${vo.eTime}</div>
         <div class="col-1 border text-center">${vo.people}명</div>
-        <div class="col-1 border text-center">${peopleNum}명</div>
         <div class="col-1 border text-center">${vo.place}</div>
         <div class="col-1 border text-center">${vo.target}</div>
         <div class="col-1 border text-center">${vo.money}원</div>

@@ -42,7 +42,7 @@
 <p><br /></p>
 <div class='container'>
 <span><font id="work1" size="5em">추천 활동</font></span>
-<span id="work2"><a href="#" style="color: #676a59; font-size: 1em;"><b>활동 전체보기 ></b></a></span>
+<span id="work2"><a href="${ctp}/MemberEventAll.me" style="color: #676a59; font-size: 1em;"><b>활동 전체보기 ></b></a></span>
   <c:set var="cnt" value="0"/>
   <c:forEach var="i"  begin="1" end="3">
 	  <div class="row">

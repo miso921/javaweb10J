@@ -47,7 +47,7 @@ public class MemberRezController extends HttpServlet {
 		else if(com.equals("/MemberEventRezCancle")) {
 			command = new MemberEventRezCancleCommand();
 			command.execute(request, response);
-			viewPage = "/include/message.jsp";
+			return;
 		}
 		else if(com.equals("/ManagerEventTotalList")) {
 			command = new ManagerEventTotalListCommand();

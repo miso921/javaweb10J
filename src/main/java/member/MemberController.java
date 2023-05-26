@@ -133,8 +133,10 @@ public class MemberController extends HttpServlet {
 			command.execute(request, response);
 			viewPage += "/memberEventContent.jsp";
 		}	
-		else if(com.equals("/MemberActiveAll")) {
-			viewPage += "/memberActiveAll.jsp";
+		else if(com.equals("/MemberEventAll")) {
+			command = new MemberEventAllCommand(); 
+			command.execute(request, response);
+			viewPage += "/memberEventAll.jsp";
 		}	
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 		dispatcher.forward(request, response);

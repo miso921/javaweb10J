@@ -4,6 +4,7 @@ public class EventDateVO {
 	private int idx;
 	private String eventName;
 	private String eDate;
+	private String peopleNum;
 	
 	public int getIdx() {
 		return idx;
@@ -23,9 +24,16 @@ public class EventDateVO {
 	public void seteDate(String eDate) {
 		this.eDate = eDate;
 	}
+	public String getPeopleNum() {
+		return peopleNum;
+	}
+	public void setPeopleNum(String peopleNum) {
+		this.peopleNum = peopleNum;
+	}
 	
 	@Override
 	public String toString() {
-		return "EventDateVO [idx=" + idx + ", eventName=" + eventName + ", eDate=" + eDate + "]";
+		return "EventDateVO [idx=" + idx + ", eventName=" + eventName + ", eDate=" + eDate + ", peopleNum=" + peopleNum
+				+ "]";
 	}
 }

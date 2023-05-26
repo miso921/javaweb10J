@@ -6,10 +6,9 @@ create table eventInput (
 	eventName   varchar(30) not null,                         /* 행사명 */
 	eTime       varchar(20) not null,              						/* 행사 가능 시간 */
 	people      int not null,                                 /* 모집 인원 */
-	peopleNum   int default 0,                                /* 실제 참여한 인원 수 */
 	place       varchar(30) not null,                         /* 행사 장소 */
 	target      varchar(30),                                  /* 모집 대상 */
-	money       int,                                          /* 참가비 */
+	money       varchar(30),                                  /* 참가비 */
 	photo       varchar(100) not null,                        /* 행사사진 / 상세정보 / 오시는길 사진 */
 	UNIQUE KEY unique_name (eventName)                         
 );

@@ -1,4 +1,4 @@
-package memberRez;
+package member;
 
 public class MemberRezVO {
 	private int idx;

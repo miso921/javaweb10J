@@ -15,6 +15,8 @@ create table eventInput (
 
 desc eventInput;
 
+
+
 drop table eventInput;
 
 create table eventDate (
@@ -27,3 +29,5 @@ create table eventDate (
 desc eventDate;
 
 drop table eventDate;
+
+alter table eventDate add constraint FK_ed foreign key (eventName) REFERENCES eventInput (eventName);

@@ -22,11 +22,7 @@ public class ManagerEventInputOkCommand implements ManagerInterface {
 		
 		// 파일 업로드처리(객체가 생성되면서 파일이 업로드처리된다.)
 		MultipartRequest multipartRequest = new MultipartRequest(request, realPath, maxSize, encoding, new DefaultFileRenamePolicy());
-		
-		HttpSession session = request.getSession();
-		String mid = (String) session.getAttribute("sMid");
-		String nickName = (String) session.getAttribute("sNickName");
-		
+
 		// 전송된 폼의 값들을 모두 받아온다.
 		int fileSize = multipartRequest.getParameter("fileSize")==null ? 0 : Integer.parseInt(multipartRequest.getParameter("fileSize"));
 		String part = multipartRequest.getParameter("part")==null ? "" : multipartRequest.getParameter("part");
@@ -50,7 +46,6 @@ public class ManagerEventInputOkCommand implements ManagerInterface {
 			//if(multipartRequest.getFilesystemName(file) != null) {
 				originalFileName += multipartRequest.getOriginalFileName(file) + "/";
 				filesystemName += multipartRequest.getFilesystemName(file) + "/";
-				System.out.println("통과...");
 			//}
 		}
 		originalFileName = originalFileName.substring(0, originalFileName.length()-1);
@@ -65,7 +60,7 @@ public class ManagerEventInputOkCommand implements ManagerInterface {
 		vo.setTarget(target);
 		vo.setMoney(money);
 		vo.setPhoto(filesystemName);
-		System.out.println("vo(photo) : " + vo);
+		
 		ManagerDAO dao = new ManagerDAO(); 
 		int res = dao.setManagerEventInputOk(vo);
 		

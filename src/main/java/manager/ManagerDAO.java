@@ -69,13 +69,15 @@ public class ManagerDAO {
 		return totRecCnt;
 	}
 
-	// 행사 전체 조회 처리(관리자 행사목록)
+	// 행사 전체 조회 처리
 	public ArrayList<ManagerVO> getEventList(int startIndexNo, int pageSize) {
 		ArrayList<ManagerVO> vos = new ArrayList<>();
 		try {
 //			sql = "select ei.*, ed.eDate from eventInput ei, eventDate ed where ei.eventName = ed.eventName and eDate > now() "
 //					+ "group by ei.eventName order by eDate desc limit ?,?";   // group by를 사용하면 중복건수를 제외하고 가져올 수 있다!!
-			sql = "select * from eventInput order by eDate desc limit ?,?";
+//			sql = "select ei.*, ed.eDate, ed.peopleNum from eventInput ei, eventDate ed "
+//					+ "where ei.eventName = ed.eventName group by ei.eventName order by idx desc limit ?,?";
+			sql = "select * from eventInput order by idx desc limit ?,?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, startIndexNo);
 			pstmt.setInt(2, pageSize);
@@ -93,8 +95,6 @@ public class ManagerDAO {
 				vo.setMoney(rs.getString("money"));
 				vo.setPhoto(rs.getString("photo"));
 				
-//				vo.seteDate(rs.getString("eDate"));
-				
 				vos.add(vo); // vos에 데이터 추가!
 			}
 		} catch (SQLException e) {
@@ -104,24 +104,7 @@ public class ManagerDAO {
 		}
 		return vos;
 	}
-	
 
-	// 행사정보 삭제 처리
-	public int setManagerEventDelete(int idx) {
-		int res = 0;
-		try {
-			sql = "delete from eventInput where idx = ?";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, idx);
-			pstmt.executeUpdate();
-			res = 1;
-		} catch (SQLException e) {
-			System.out.println("SQL 오류(setManagerEventDelete) : " + e.getMessage());
-		} finally {
-			getConn.pstmtClose();
-		}
-		return res;
-	}
 
 	// 회원 전체 조회 처리
 	public ArrayList<MemberVO> getManagerMemberList(int statrIndexNo, int pageSize) {
@@ -210,6 +193,7 @@ public class ManagerDAO {
 		return vos;
 	}
 
+	// 개별 행사 출력 처리
 	public ManagerVO getEventContent(int idx) {
 		ManagerVO vo = new ManagerVO();
 		try {
@@ -264,11 +248,26 @@ public class ManagerDAO {
 				vos.add(vo);
 			}
 		} catch (SQLException e) {
-			System.out.println("SQL 오류(getEventList) : " + e.getMessage());
+			System.out.println("SQL 오류(getEventNameList) : " + e.getMessage());
 		} finally {
 			getConn.rsClose();
 		}
 		return vos;
+	}
+
+	// 체크박스 선택 삭제
+	public void setEventSelectedDel(int idx) {
+		try {
+			sql = "delete from eventInput where idx = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, idx);
+			pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			System.out.println("SQL 오류(setEventSelectedDel) : " + e.getMessage());
+		} finally {
+			getConn.pstmtClose();
+		}
 	}
 	
 	

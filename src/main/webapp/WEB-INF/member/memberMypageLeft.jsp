@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
 <c:set var="ctp" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html>
@@ -9,6 +8,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>managerLeft.jsp</title>
 	<jsp:include page="/include/bs4.jsp" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
 	<style>
 		@font-face {
 	    font-family: 'Pretendard-Regular';
@@ -33,9 +33,10 @@
 <div class="text-center card-hover" id="accordion">
   <h2><a href="${ctp}/MemberMypageMain.me"><font color="black">나의페이지</font></a></h2>
   <hr/>
-  <p><a href="${ctp}/" target="_top" style="color:black"><i class="fa fa-home"></i></a></p>
+  <p><a href="${ctp}/" target="_top" style="color:black"><i class="fa fa-home fa-lg"></i></a></p>
   <hr/>
-  <p><a href="${ctp}/MemberEventRezList.mer" target="memberMypageContent"><font size="4em;" color="black">내예약확인</font></a></p>
+  <%-- <p><a href="${ctp}/MemberEventRezList.me" target="memberMypageContent"><font size="4em;" color="black">내예약확인</font></a></p> --%>
+  <p><a href="${ctp}/MemberEventRezList.me" target="memberMypageContent"><font size="4em;" color="black">내예약확인</font></a></p>
   <hr/>
   <div class="card">
   	<div class="card-header m-0 p-2">

@@ -9,18 +9,18 @@
 	<title>memberMypageContent.jsp</title>
 	<jsp:include page="/include/bs4.jsp" />
 	<style>
-	@font-face {
-    font-family: 'Pretendard-Regular';
-    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
-    font-weight: 400;
-    font-style: normal;
-	}
-	body{font-family:'Pretendard-Regular';}
-	#content {text-align:left;margin-left:50px;}
-	hr {
-	  width : 30%;
-	 	margin-left: 0;
-	}
+		@font-face {
+		   font-family: 'GmarketSansMedium';
+		   src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+		   font-weight: normal;
+		   font-style: normal;
+		}
+		body {font-family: 'GmarketSansMedium';}
+		#content {text-align:left;margin-left:50px;}
+		hr {
+		  width : 30%;
+		 	margin-left: 0;
+		}
 	</style>
 </head>
 <body>

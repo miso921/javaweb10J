@@ -36,4 +36,5 @@ public class EventDateVO {
 		return "EventDateVO [idx=" + idx + ", eventName=" + eventName + ", eDate=" + eDate + ", peopleNum=" + peopleNum
 				+ "]";
 	}
+			
 }

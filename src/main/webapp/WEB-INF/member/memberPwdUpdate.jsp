@@ -64,38 +64,42 @@
 <p><br/></p>
 <div class="container">
   <form name="myform" method="post" action="${ctp}/MemberPwdUpdateOk.me" class="was-validated">
-  	<h2 class="text-center">비밀번호 변경</h2>
-  	<br/>
-  	<table class="table table-bordered">
-  	  <tr>
-  	    <th>기본 비밀번호</th>
-  	    <td>
-  	      <input type="password" name="oldPwd" id="oldPwd" autofocus required class="form-control"/>
-  	      <div class="invalid-feedback">기존 비밀번호를 입력하세요.</div>
-  	    </td>
-  	  </tr>
-  	  <tr>
-  	    <th>새 비밀번호</th>
-  	    <td>
-  	      <input type="password" name="newPwd" id="newPwd" required class="form-control"/>
-  	      <div class="invalid-feedback">새 비밀번호를 입력하세요.</div>
-  	    </td>
-  	  </tr>
-  	  <tr>
-  	    <th>비밀번호 확인</th>
-  	    <td>
-  	      <input type="password" name="rePwd" id="rePwd" required class="form-control"/>
-  	      <div class="invalid-feedback">새 비밀번호를 한번더 입력해 주세요.</div>
-  	    </td>
-  	  </tr>
-  	  <tr>
-  	    <td colspan="2" class="text-center">
-  	      <input type="button" value="비밀번호변경" onclick="fCheck()" class="btn btn-success mr-2"/>
-  	      <input type="reset" value="다시입력"class="btn btn-warning mr-2"/>
-  	      <input type="button" value="돌아가기" onclick="location.href='${ctp}/MemberMain.mem';" class="btn btn-secondary"/>
-  	    </td>
-  	  </tr>
-  	</table>
+    <h2 class="text-center">비밀번호 변경</h2>
+    <br/>
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <table class="table table-bordered">
+          <tr>
+            <th id="op">기존 비밀번호</th>
+            <td>
+              <input type="password" name="oldPwd" id="oldPwd" autofocus required class="form-control-md"/>
+              <div class="invalid-feedback">기존 비밀번호를 입력하세요.</div>
+            </td>
+          </tr>
+          <tr>
+            <th id="np">새 비밀번호</th>
+            <td>
+              <input type="password" name="newPwd" id="newPwd" required class="form-control-md"/>
+              <div class="invalid-feedback">새 비밀번호를 입력하세요.</div>
+            </td>
+          </tr>
+          <tr>
+            <th id="npo">비밀번호 확인</th>
+            <td>
+              <input type="password" name="rePwd" id="rePwd" required class="form-control-md"/>
+              <div class="invalid-feedback">새 비밀번호를 한번 더 입력해 주세요.</div>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2" class="text-center">
+              <input type="button" value="비밀번호 변경" onclick="fCheck()" class="btn btn-success mr-2"/>
+              <input type="reset" value="다시 입력" class="btn btn-warning mr-2"/>
+              <input type="button" value="돌아가기" onclick="location.href='${ctp}/MemberMain.mem';" class="btn btn-secondary"/>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
   </form>
 </div>
 <p><br/></p>

@@ -9,15 +9,8 @@
 	<title>memberMypage.jsp</title>
 	<jsp:include page="/include/bs4.jsp" />
 	<style>
-	@font-face {
-    font-family: 'Pretendard-Regular';
-    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
-    font-weight: 400;
-    font-style: normal;
-	}
 	/* reset */
 	html,body{width:100%;height:100%;}
-	body{font-family:'Pretendard-Regular';}
 	</style>
 	<frameset cols="200px,*">
 		<frame src="${ctp}/MemberMypageLeft.me" name="memberMypageLeft" frameborder="0" />

@@ -19,6 +19,12 @@
     font-family: 'GmarketSansMedium';
     width: 100%;
 	  }  
+	  .form-group {
+	  	margin-left:130px;
+	  }
+	  .invalid-feedback {
+	  	margin-left:70px;
+	  }
   </style>
   <script>
     'use strict';
@@ -46,7 +52,7 @@
           <br/>
           <div class="form-group">
             <label for="pwd">비밀번호</label>
-            <input type="password" name="pwd" id="pwd" autofocus required class="form-control"/>
+            <input type="password" name="pwd" id="pwd" autofocus required class="form-control-md"/>
             <div class="invalid-feedback">비밀번호를 입력하세요.</div>
           </div>
           <div class="text-center">

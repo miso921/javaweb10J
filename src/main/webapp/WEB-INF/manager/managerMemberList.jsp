@@ -11,12 +11,14 @@
 	<jsp:include page="/include/bs4.jsp" />
 	<style>
 		@font-face {
-	    font-family: 'Pretendard-Regular';
-	    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+	    font-family: 'SUITE-Regular';
+	    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2');
 	    font-weight: 400;
-	    font-style: normal;
+	    font-style: normasl;
 		}
-		body{font-family:'Pretendard-Regular';}
+		body{font-family:'SUITE-Regular';}
+		#totalLevel {margin-left:820px;}
+		#levelChange {margin-left:-20px;}
 	</style>
 	<script>
 		'use strict';
@@ -142,7 +144,7 @@
 	    <div class="row borderless m-0 p-0">
 	      <div class="col mb-2">
 	        <!-- 한페이지 분량처리 -->
-	        <select name="pageSize" id="pageSize" onchange="pageCheck()" class="form-control">
+	        <select name="pageSize" id="pageSize" onchange="pageCheck()" class="form-control-sm">
 	          <option <c:if test="${pageSize == 3}">selected</c:if>>3</option>
 	          <option <c:if test="${pageSize == 5}">selected</c:if>>5</option>
 	          <option <c:if test="${pageSize == 10}">selected</c:if>>10</option>
@@ -150,20 +152,20 @@
 	          <option <c:if test="${pageSize == 20}">selected</c:if>>20</option>
 	        </select>
 	      </div>
-	      <div class="col">
+	      <!-- <div class="col">
 	        <div class="form-check">
 	          <input type="checkbox" id="checkAll" class="form-check-input">
 	          <label class="form-check-label" for="checkAll">전체선택/해제</label>
 	        </div>
-	      </div>
-	      <div class="col">
+	      </div> -->
+	      <!-- <div class="col">
 	        <div class="form-check">
 	          <input type="checkbox" id="reverseAll" class="form-check-input">
 	          <label class="form-check-label" for="reverseAll">전체반전</label>
 	        </div>
-	      </div>
+	      </div> -->
 	      <div class="col">
-	        <select name="totalLevel" id="totalLevel" class="form-control">
+	        <select name="totalLevel" id="totalLevel" class="form-control-sm">
 	          <option value="0">관리자</option>
 	          <option value="1" selected>회원</option>
 	        </select>
@@ -173,11 +175,16 @@
 	      </div>
 	    </div>
 	    <div class="table-responsive">
-	      <table class="table table-bordered">
+	      <table class="table table-bordered text-center">
 	        <thead>
 	          <tr>
-	            <th>번호</th>
-	            <th>성명</th>
+	            <th>
+	            	<div class="form-check">
+	          			<input type="checkbox" id="checkAll" class="form-check-input">
+	          			<label class="form-check-label" for="checkAll">전체</label>
+	        			</div>
+	            </th>
+	            <th>이름</th>
 	            <th>아이디</th>
 	            <th>별명</th>
 	            <th>생년월일</th>
@@ -192,8 +199,8 @@
 	        <tbody>
 	          <c:forEach var="vo" items="${vos}" varStatus="st">
 	            <tr>
-	              <td>
-	              	<input type="checkbox" class="chk" name="chk" value="${vo.idx}" /> &nbsp;
+	              <td class="text-center">
+	              	<input type="checkbox" class="chk" name="chk" value="${vo.idx}" />
 	              	${curScrStartNo}
 	              </td>
 	              <td>${vo.name}</td>
@@ -206,7 +213,7 @@
 	              <td>${vo.userDel}</td>
 	              <td>
 	                <form name="levelForm">
-	                  <select name="level" onchange="levelChange(this)" class="form-control">
+	                  <select name="level" onchange="levelChange(this)" class="form-control-sm">
 	                    <option value="0/${vo.idx}" ${vo.level==0 ? "selected" : ""}>관리자</option>
 	                    <option value="1/${vo.idx}" ${vo.level==1 ? "selected" : ""}>회원</option>
 	                  </select>

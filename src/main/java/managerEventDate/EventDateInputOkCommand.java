@@ -13,6 +13,7 @@ public class EventDateInputOkCommand implements EventDateInterface {
 		String eDate = request.getParameter("eDate") == null ? "" : request.getParameter("eDate");
 		String eventName = request.getParameter("eventName") == null ? "" : request.getParameter("eventName");
 		
+		
 		EventDateDAO dao = new EventDateDAO();
 		EventDateVO vo = new EventDateVO();
 		

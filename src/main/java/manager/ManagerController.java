@@ -8,19 +8,28 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @SuppressWarnings("serial")
 @WebServlet("*.ma")
 public class ManagerController extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		int level = (int) session.getAttribute("sLevel");
+		
 		ManagerInterface command = null;
 		String viewPage = "WEB-INF/manager";
 		
 		String uri = request.getRequestURI();
 		String com = uri.substring(uri.lastIndexOf("/"),uri.lastIndexOf("."));
 		
-		if(com.equals("/ManagerMain")) {
+		// 일반회원,비회원(세션에 저장된 level이 0보다 클 경우) 초기화면으로 보내버린다.
+		if (level > 0) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/");
+			dispatcher.forward(request, response);
+		}
+		else if(com.equals("/ManagerMain")) {
 			viewPage += "/managerMain.jsp";
 		}
 		else if(com.equals("/ManagerLeft")) {
@@ -52,7 +61,7 @@ public class ManagerController extends HttpServlet {
 		else if(com.equals("/ManagerEventDelete")) {
 			command = new ManagerEventDeleteCommand();
 			command.execute(request, response);
-			viewPage = "/include/message.jsp";
+			return;
 		}
 		else if(com.equals("/ManagerMemberList")) {
 			command = new ManagerMemberListCommand();

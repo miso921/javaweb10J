@@ -1,4 +1,4 @@
-package memberRez;
+package review;
 
 import java.io.IOException;
 
@@ -10,13 +10,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import member.MemberInterface;
+
 @SuppressWarnings("serial")
-@WebServlet("*.mer")
-public class MemberRezController extends HttpServlet {
+@WebServlet("*.re")
+public class ReviewController extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		MemberRezInterface command = null;
-		String viewPage = "WEB-INF/memberRez";
+		MemberInterface command = null;
+		String viewPage = "WEB-INF/review";
 		
 		String uri = request.getRequestURI();
 		String com = uri.substring(uri.lastIndexOf("/"),uri.lastIndexOf("."));
@@ -29,32 +31,26 @@ public class MemberRezController extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/");
 			dispatcher.forward(request, response);
 		}
-		else if(com.equals("/MemberEventRez")) {
-			command = new MemberEventRezCommand();
+		else if(com.equals("/ReviewInput")) {
+			command = new ReviewInputCommand();
 			command.execute(request, response);
-			viewPage += "/memberEventRez.jsp";
-		}
-		else if(com.equals("/MemberEventRezOk")) {
-			command = new MemberEventRezOkCommand();
+			viewPage += "/reviewInput.jsp";
+		}	
+		else if(com.equals("/ReviewList")) {
+			command = new ReviewListCommand();
 			command.execute(request, response);
-			viewPage = "/include/message.jsp";
-		}
-		else if(com.equals("/MemberEventRezList")) {
-			command = new MemberEventRezListCommand();
-			command.execute(request, response);
-			viewPage += "/memberEventRezList.jsp";
-		}
-		else if(com.equals("/MemberEventRezCancle")) {
-			command = new MemberEventRezCancleCommand();
+			viewPage += "/reviewList.jsp";
+		}	
+		else if(com.equals("/ReviewDel")) {
+			command = new ReviewDelCommand();
 			command.execute(request, response);
 			return;
-		}
-		else if(com.equals("/ManagerEventTotalList")) {
-			command = new ManagerEventTotalListCommand();
+		}	
+		else if(com.equals("/ReviewInputOk")) {
+			command = new ReviewInputOkCommand();
 			command.execute(request, response);
-			viewPage += "/memberEventRezList.jsp";
-		}
-		
+			viewPage = "/include/message.jsp";
+		}	
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 		dispatcher.forward(request, response);
 	}

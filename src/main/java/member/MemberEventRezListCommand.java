@@ -1,4 +1,4 @@
-package memberRez;
+package member;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -8,20 +8,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class MemberEventRezListCommand implements MemberRezInterface {
+import memberRez.MemberRezInterface;
+
+public class MemberEventRezListCommand implements MemberInterface {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		String mid = (String) session.getAttribute("sMid");
 		
-		MemberRezDAO dao = new MemberRezDAO();
-		//MemberRezVO vo = new MemberRezVO();
+		MemberDAO dao = new MemberDAO();
 		
 		// 페이징처리
 		int pag = request.getParameter("pag")== null ? 1 : Integer.parseInt(request.getParameter("pag"));
 		int pageSize = request.getParameter("pageSize")== null ? 5 : Integer.parseInt(request.getParameter("pageSize"));
-		int totRecCnt = dao.getTotRecCnt(mid);
+		int totRecCnt = dao.getTotRecCnt(4);
 		int totPage = (totRecCnt % pageSize)==0 ? (totRecCnt / pageSize) : (totRecCnt / pageSize) + 1 ;
 		int startIndexNo = (pag - 1) * pageSize;
 		int curScrStartNo = totRecCnt - startIndexNo;

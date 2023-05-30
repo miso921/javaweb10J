@@ -1,4 +1,4 @@
-package memberRez;
+package member;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -43,14 +43,14 @@ public class MemberRezDAO {
 	public int setMemberRezCancle(int idx) {
 		int res = 0;
 		try {
+//			sql = "delete from reservation re  where idx = ?";
 			sql = "delete from reservation where idx = ?";
-			sql = "delete from reservation re  where idx = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, idx);
 			pstmt.executeUpdate();
 			res = 1;
 		} catch (SQLException e) {
-			System.out.println("SQL 오류(setMemberRezOk) : " + e.getMessage());
+			System.out.println("SQL 오류(setMemberRezCancle) : " + e.getMessage());
 		} finally {
 			getConn.pstmtClose();
 		}
@@ -99,7 +99,7 @@ public class MemberRezDAO {
 				vos.add(vo);
 			}
 		} catch (SQLException e) {
-			System.out.println("SQL 오류(getTotRecCnt) : " + e.getMessage());
+			System.out.println("SQL 오류(getMemberEventRezList) : " + e.getMessage());
 		} finally {
 			getConn.rsClose();
 		}
@@ -146,7 +146,7 @@ public class MemberRezDAO {
 				vos.add(vo);
 			}
 		} catch (SQLException e) {
-			System.out.println("SQL 오류(getTotRecCnt) : " + e.getMessage());
+			System.out.println("SQL 오류(getMemberEventRezList) : " + e.getMessage());
 		} finally {
 			getConn.rsClose();
 		}

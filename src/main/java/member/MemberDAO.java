@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import conn.GetConn;
 import manager.ManagerVO;
@@ -48,7 +49,7 @@ public class MemberDAO {
 				vo.setLevel(rs.getInt("level"));
 			}
 		} catch (SQLException e) {
-			System.out.println("SQL 오류 : " + e.getMessage());
+			System.out.println("SQL 오류(getMemberMidCheck) : " + e.getMessage());
 		} finally {
 			getConn.rsClose();
 		}
@@ -75,7 +76,7 @@ public class MemberDAO {
 			pstmt.executeUpdate();
 			res = 1;
 		} catch (SQLException e) {
-			System.out.println("SQL 오류 : " + e.getMessage());
+			System.out.println("SQL 오류(setLoginJoinOk) : " + e.getMessage());
 		} finally {
 			getConn.pstmtClose();
 		}
@@ -105,7 +106,7 @@ public class MemberDAO {
 				vo.setUserDel(rs.getString("userDel"));
 			}
 		} catch (SQLException e) {
-			System.out.println("SQL 오류 : " + e.getMessage());
+			System.out.println("SQL 오류(getMemberNickCheck) : " + e.getMessage());
 		} finally {
 			getConn.pstmtClose();
 		}
@@ -128,7 +129,7 @@ public class MemberDAO {
 				vo.setNick(rs.getString("nick"));
 			}
 		} catch (SQLException e) {
-			System.out.println("SQL 오류 : " + e.getMessage());
+			System.out.println("SQL 오류(getMemberFindMidOk) : " + e.getMessage());
 		} finally {
 			getConn.rsClose();
 		}
@@ -152,7 +153,7 @@ public class MemberDAO {
 			pstmt.executeLargeUpdate();
 			res = 1;
 		} catch (SQLException e) {
-			System.out.println("SQL 오류 : " + e.getMessage());
+			System.out.println("SQL 오류(setMemberUpdateOk) : " + e.getMessage());
 		} finally {
 			getConn.pstmtClose();
 		}
@@ -181,7 +182,8 @@ public class MemberDAO {
 	public ManagerVO getMemberEventContent(int idx) {
 		ManagerVO vo = new ManagerVO();
 		try {
-			sql = "select ei.*, ed.eDate from eventInput ei, eventDate ed where ei.idx=?";
+			sql = "select ei.*, ed.peopleNum, ed.eDate as peopleNum "
+					+ "from eventInput ei, eventDate ed where ei.idx=? and ed.eventName = ei.eventName";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, idx);
 			rs = pstmt.executeQuery();
@@ -196,15 +198,76 @@ public class MemberDAO {
 				vo.setTarget(rs.getString("target"));
 				vo.setMoney(rs.getString("money"));
 				vo.setPhoto(rs.getString("photo"));
+				
+				vo.setPeopleNum(rs.getInt("peopleNum"));
+				
+				vo.seteDate(rs.getString("eDate"));
 			}
 		} catch (SQLException e) {
-			System.out.println("SQL 오류(setMemberEventContent) : " + e.getMessage());
+			System.out.println("SQL 오류(getMemberEventContent) : " + e.getMessage());
 		} finally {
 			getConn.rsClose();
 		}
 		return vo;
 	}
+	
+	//전체 레코드 건수 구하기
+	public int getTotRecCnt(int flag) {
+		int totRecCnt = 0;
+		try {
+			if(flag == 1) {
+			  sql = "select count(idx) as cnt from member";
+			}
+			else if(flag == 2) {
+				sql = "select count(idx) as cnt from eventInput";
+			}
+			else if(flag == 3) {
+				sql = "select count(distinct ei.idx) as cnt from eventDate ed, eventInput ei "
+						+ "where ed.eDate > now() and ed.eventName = ei.eventName";
+			}
+			else if(flag == 4) {
+				sql = "select count(idx) as cnt from reservation";
+			}
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			rs.next();
+			totRecCnt = rs.getInt("cnt");
+		} catch (SQLException e) {
+			System.out.println("SQL 오류(getTotRecCnt) : " + e.getMessage());
+		} finally {
+			getConn.rsClose();
+		}
+		return totRecCnt;
+	}
 
+	// 예약목록 출력 처리
+	public ArrayList<MemberRezVO> getMemberEventRezList(int startIndexNo, int pageSize, String mid) {
+		ArrayList<MemberRezVO> vos = new ArrayList<MemberRezVO>();
+		try {
+			sql = "select * from reservation where mid = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mid);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				MemberRezVO vo = new MemberRezVO();
+				vo.setIdx(rs.getInt("idx"));
+				vo.setEventName(rs.getString("eventName"));
+				vo.setMid(rs.getString("mid"));
+				vo.setrDate(rs.getString("rDate"));
+				vo.setrTime(rs.getString("rTime"));
+				vo.setrPeopleNum(rs.getInt("rPeopleNum"));
+				vo.setAplDate(rs.getString("aplDate"));
+				
+				vos.add(vo);
+			}
+		} catch (SQLException e) {
+			System.out.println("SQL 오류(getMemberEventRezList) : " + e.getMessage());
+		} finally {
+			getConn.rsClose();
+		}
+		return vos;
+	}
 
 	
 	

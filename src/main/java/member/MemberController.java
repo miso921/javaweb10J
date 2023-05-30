@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+
 @SuppressWarnings("serial")
 @WebServlet("*.me")
 public class MemberController extends HttpServlet {
@@ -129,7 +130,7 @@ public class MemberController extends HttpServlet {
 			viewPage = "/include/message.jsp";
 		}	
 		else if(com.equals("/MemberEventContent")) {
-			command = new MemberEventContentCommand(); 
+			command = new MemberEventContentCommand();
 			command.execute(request, response);
 			viewPage += "/memberEventContent.jsp";
 		}	
@@ -137,6 +138,26 @@ public class MemberController extends HttpServlet {
 			command = new MemberEventAllCommand(); 
 			command.execute(request, response);
 			viewPage += "/memberEventAll.jsp";
+		}	
+		else if(com.equals("/MemberEventRezList")) {
+			command = new MemberEventRezListCommand();
+			command.execute(request, response);
+			viewPage += "/memberEventRezList.jsp";
+		}	
+		else if(com.equals("/MemberEventRez")) {
+			command = new MemberEventRezCommand();
+			command.execute(request, response);
+			viewPage += "/memberEventRez.jsp";
+		}	
+		else if(com.equals("/MemberEventRezOk")) {
+			command = new MemberEventRezOkCommand();
+			command.execute(request, response);
+			viewPage = "/include/message.jsp";
+		}	
+		else if(com.equals("/MemberEventRezCancle")) {
+			command = new MemberEventRezCancleCommand();
+			command.execute(request, response);
+			return;
 		}	
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 		dispatcher.forward(request, response);

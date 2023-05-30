@@ -11,12 +11,12 @@
 	<jsp:include page="/include/bs4.jsp" />
 	<style>
 		@font-face {
-	    font-family: 'SUITE-Regular';
-	    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2');
-	    font-weight: 400;
+	    font-family: 'GmarketSansMedium';
+	    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+	    font-weight: normal;
 	    font-style: normal;
 		}
-		body{font-family:'SUITE-Regular';}
+	  body {font-family: 'GmarketSansMedium';}
 	</style>
 	<script>
 		'use strict';
@@ -24,7 +24,8 @@
 			
 			function pageCheck() {
 				let pageSize = document.getElementById("pageSize").value;
-				location.href = "${ctp}/MemberEventRezList.mer?pag=${pag}&pageSize="+pageSize;
+				/* location.href = "${ctp}/MemberEventRezList.me?pag=${pag}&pageSize="+pageSize; */
+				location.href = "${ctp}/Hi.me?pag=${pag}&pageSize="+pageSize;
 			}
 			
 			
@@ -35,7 +36,7 @@
 				
 				$.ajax({
 					type  : "post",
-					url   : "${ctp}/MemberEventRezCancle.mer",
+					url   : "${ctp}/MemberEventRezCancle.me",
 					data  : {idx : idx},
 					success : function(res) {
 						if(res==1) {
@@ -58,7 +59,7 @@
 <div class="container">
 	<form name="myform">
 	    <br>
-	    <h2 class="text-center"><b>행 사 예 약 목 록</b></h2>
+	    <h2 class="text-center"><b>예 약 목 록</b></h2>
 	    <br>
 	    <div class="row borderless m-0 p-0">
 	      <div class="col mb-2">
@@ -71,28 +72,6 @@
 	          <option <c:if test="${pageSize == 20}">selected</c:if>>20</option>
 	        </select>
 	      </div>
-	     <!--  <div class="col">
-	        <div class="form-check">
-	          <input type="checkbox" id="checkAll" class="form-check-input">
-	          <label class="form-check-label" for="checkAll">전체선택/해제</label>
-	        </div>
-	      </div>
-	      <div class="col">
-	        <div class="form-check">
-	          <input type="checkbox" id="reverseAll" class="form-check-input">
-	          <label class="form-check-label" for="reverseAll">전체반전</label>
-	        </div>
-	      </div>
-	      <div class="col">
-	        <select name="totalLevel" id="totalLevel" class="form-control">
-	          <option value="0">관리자</option>
-	          <option value="1" selected>회원</option>
-	        </select>
-	      </div> -->
-	     <!--  <div class="col">
-	        <input type="button" value="등급변경" id="levelChange" onclick="mLevelCheck()" class="btn btn-outline-warning btn-sm mb-2">
-	      </div>
-	    </div> -->
 	    <div class="table-responsive">
 	      <table class="table table-bordered">
 	        <thead>
@@ -137,34 +116,34 @@
 	      <ul class="pagination justify-content-center pagination-sm">
 	        <c:if test="${pag > 1}">
 	          <li class="page-item">
-	            <a class="page-link text-secondary" href="${ctp}/ManagerMemberList.ma?pageSize=${pageSize}&pag=1">첫페이지</a>
+	            <a class="page-link text-secondary" href="${ctp}/ManagerEventRezList.mer?pageSize=${pageSize}&pag=1">첫페이지</a>
 	          </li>
 	        </c:if>
 	        <c:if test="${curBlock > 0}">
 	          <li class="page-item">
-	            <a class="page-link text-secondary" href="${ctp}/ManagerMemberList.ma?pageSize=${pageSize}&pag=${(curBlock-1)*blockSize + 1}">이전블록</a>
+	            <a class="page-link text-secondary" href="${ctp}/ManagerEventRezList.mer?pageSize=${pageSize}&pag=${(curBlock-1)*blockSize + 1}">이전블록</a>
 	          </li>
 	        </c:if>
 	        <c:forEach var="i" begin="${curBlock*blockSize + 1}" end="${curBlock*blockSize + blockSize}" varStatus="st">
 	          <c:if test="${i <= totPage && i == pag}">
 	            <li class="page-item active">
-	              <a class="page-link text-white bg-secondary border-secondary" href="${ctp}/ManagerMemberList.ma?pageSize=${pageSize}&pag=${i}">${i}</a>
+	              <a class="page-link text-white bg-secondary border-secondary" href="${ctp}/ManagerEventRezList.mer?pageSize=${pageSize}&pag=${i}">${i}</a>
 	            </li>
 	          </c:if>
 	          <c:if test="${i <= totPage && i != pag}">
 	            <li class="page-item">
-	              <a class="page-link text-secondary" href="${ctp}/ManagerMemberList.ma?pageSize=${pageSize}&pag=${i}">${i}</a>
+	              <a class="page-link text-secondary" href="${ctp}/ManagerEventRezList.mer?pageSize=${pageSize}&pag=${i}">${i}</a>
 	            </li>
 	          </c:if>
 	        </c:forEach>
 	        <c:if test="${curBlock < lastBlock}">
 	          <li class="page-item">
-	            <a class="page-link text-secondary" href="${ctp}/ManagerMemberList.ma?pageSize=${pageSize}&pag=${(curBlock+1)*blockSize + 1}">다음블록</a>
+	            <a class="page-link text-secondary" href="${ctp}/ManagerEventRezList.mer?pageSize=${pageSize}&pag=${(curBlock+1)*blockSize + 1}">다음블록</a>
 	          </li>
 	        </c:if>
 	        <c:if test="${pag < totPage}">
 	          <li class="page-item">
-	            <a class="page-link text-secondary" href="${ctp}/ManagerMemberList.ma?pageSize=${pageSize}&pag=${totPage}">마지막페이지</a>
+	            <a class="page-link text-secondary" href="${ctp}/ManagerEventRezList.mer?pageSize=${pageSize}&pag=${totPage}">마지막페이지</a>
 	          </li>
 	        </c:if>
 	      </ul>

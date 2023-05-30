@@ -8,6 +8,15 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>MemberFindMidOk.jsp</title>
 	<jsp:include page="/include/bs4.jsp" />
+	<style>
+		@font-face {
+	    font-family: 'GmarketSansMedium';
+	    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+	    font-weight: normal;
+	    font-style: normal;
+		}
+	  body {font-family: 'GmarketSansMedium';}
+	</style>
 </head>
 <body>
 <jsp:include page="/include/nav.jsp" />

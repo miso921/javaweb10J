@@ -15,6 +15,8 @@ public class MemberVO {
 	private String userDel;
 	private int level;
 	
+	private int cnt;
+	
 	public int getIdx() {
 		return idx;
 	}
@@ -93,10 +95,17 @@ public class MemberVO {
 	public void setLevel(int level) {
 		this.level = level;
 	}
+	public int getCnt() {
+		return cnt;
+	}
+	public void setCnt(int cnt) {
+		this.cnt = cnt;
+	}
+	
 	@Override
 	public String toString() {
 		return "MemberVO [idx=" + idx + ", name=" + name + ", mid=" + mid + ", nick=" + nick + ", pwd=" + pwd + ", salt="
 				+ salt + ", birthday=" + birthday + ", address=" + address + ", tel=" + tel + ", email=" + email + ", gender="
-				+ gender + ", userDel=" + userDel + ", level=" + level + "]";
+				+ gender + ", userDel=" + userDel + ", level=" + level + ", cnt=" + cnt + "]";
 	}
 }

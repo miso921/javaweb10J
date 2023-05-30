@@ -31,9 +31,9 @@
 <p><br /></p>
 <body style="background-color:#ece6cc;">
 <div class="text-center card-hover" id="accordion">
-  <h2>관리자메뉴</h2>
+  <h2><a href="${ctp}/ManagerContent.ma" target="managerContent"><font color="#212121">관리자메뉴</font></a></h2>
   <hr/>
-  <p><a href="${ctp}/" target="_top" style="color:black;"><i class="fa fa-home"></i></a></p>
+  <p><a href="${ctp}/" target="_top" style="color:black;"><i class="fa fa-home fa-lg"></i></a></p>
   <hr/>
   <p><a href="${ctp}/ManagerMemberList.ma" target="managerContent"><font size="4em;" color="black">회원관리</font></a></p>
   <hr/>
@@ -53,7 +53,7 @@
   			<a href="${ctp}/ManagerEventList.ma" target="managerContent"><font size="3em" color="black">행사목록</font></a>
 	  	</div>
   		<div class="card-body m-2 p-1">
-  			<a href="${ctp}/ManagerEventTotalList.mer" target="managerContent"><font size="3em" color="black">예약현황</font></a>
+  			<a href="${ctp}/MemberEventRezList.me" target="managerContent"><font size="3em" color="black">예약현황</font></a>
 	  	</div>
 	  </div>
   </div>

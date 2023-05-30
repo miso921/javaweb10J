@@ -13,6 +13,8 @@ public class ManagerVO {
 	
 	private String eDate;
 	
+	private int peopleNum;
+	
 	public int getIdx() {
 		return idx;
 	}
@@ -73,12 +75,17 @@ public class ManagerVO {
 	public void seteDate(String eDate) {
 		this.eDate = eDate;
 	}
+	public int getPeopleNum() {
+		return peopleNum;
+	}
+	public void setPeopleNum(int peopleNum) {
+		this.peopleNum = peopleNum;
+	}
 	
 	@Override
 	public String toString() {
 		return "ManagerVO [idx=" + idx + ", part=" + part + ", eventName=" + eventName + ", eTime=" + eTime + ", people="
 				+ people + ", place=" + place + ", target=" + target + ", money=" + money + ", photo=" + photo + ", eDate="
-				+ eDate + "]";
+				+ eDate + ", peopleNum=" + peopleNum + "]";
 	}
-	
 }

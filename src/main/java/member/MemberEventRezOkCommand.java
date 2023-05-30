@@ -1,4 +1,4 @@
-package memberRez;
+package member;
 
 import java.io.IOException;
 
@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class MemberEventRezOkCommand implements MemberRezInterface {
+public class MemberEventRezOkCommand implements MemberInterface {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -29,7 +29,7 @@ public class MemberEventRezOkCommand implements MemberRezInterface {
 		vo.setrDate(rDate);
 		vo.setrTime(eTime);
 		vo.setrPeopleNum(rPeopleNum);
-//		System.out.println("vo :" + vo);
+		
 		int res = dao.setMemberRezOk(vo);
 		
 		if(res == 1) {
@@ -38,10 +38,7 @@ public class MemberEventRezOkCommand implements MemberRezInterface {
 		}
 		else {
 			request.setAttribute("msg", "예약에 실패했습니다!");
-			request.setAttribute("url", request.getContextPath()+"/MemberEventRez.mer?idx="+idx);
+			request.setAttribute("url", request.getContextPath()+"/MemberEventRez.me?idx="+idx);
 		}
-		
-		
 	}
-
 }

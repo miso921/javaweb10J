@@ -11,12 +11,12 @@
 	<jsp:include page="/include/bs4.jsp" />
 	<style>
 		@font-face {
-	    font-family: 'SUITE-Regular';
-	    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2');
-	    font-weight: 400;
+	    font-family: 'GmarketSansMedium';
+	    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+	    font-weight: normal;
 	    font-style: normal;
 		}
-		body{font-family:'SUITE-Regular';}
+	  body {font-family: 'GmarketSansMedium';}
 	</style>
 </head>
 <body>
@@ -24,7 +24,7 @@
 <p><br /></p>
 <div class='container'>
 	<h2 class="text-center">행 사 예 약</h2>
-	<form name="myform" method="post" action="${ctp}/MemberEventRezOk.mer?idx=${vos[0].idx}">
+	<form name="myform" method="post" action="${ctp}/MemberEventRezOk.me?idx=${vos[0].idx}">
 		<div class="form-control text-center">
 			행사명 : ${vos[0].eventName}
 		</div>

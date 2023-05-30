@@ -7,6 +7,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import member.MemberRezDAO;
+import member.MemberRezVO;
+
 public class ManagerEventTotalListCommand implements MemberRezInterface {
 
 	@Override

@@ -18,12 +18,11 @@ public class EventDateDAO {
 	EventDateVO vo = null;
 
 
-//	 등록된 행사에 날짜 등록 처리
+	// 등록된 행사에 날짜 등록 처리
 	public int setEventDateInputOk(EventDateVO vo) {
-		System.out.println("vo:"+vo);
 		int res = 0;
 		try {
-			sql = "INSERT INTO eventDate values (default, ?,?)";
+			sql = "INSERT INTO eventDate values (default,?,?,default)";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, vo.getEventName());
 			pstmt.setString(2, vo.geteDate());

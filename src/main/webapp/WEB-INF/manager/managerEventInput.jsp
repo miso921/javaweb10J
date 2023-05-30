@@ -10,13 +10,15 @@
 	<jsp:include page="/include/bs4.jsp" />
 	<style>
 		@font-face {
-	    font-family: 'Pretendard-Regular';
-	    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
-	    font-weight: 400;
+	    font-family: 'GmarketSansMedium';
+	    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+	    font-weight: normal;
 	    font-style: normal;
 		}
-		/* reset */
-		body{font-family:'Pretendard-Regular';}
+		body{font-family:'GmarketSansMedium';}
+		#p {margin-left:3px;margin-right:30px;}
+		#pa {margin-bottom:25px;margin-right:30px;margin-left:-85px;}
+		#photo {margin-left:-40px;}
 	</style>
 	<script>
 		'use strict';
@@ -27,9 +29,9 @@
     function fileBoxAppend() {
     	cnt++;
     	let fileBox = '';
-    	fileBox += '<div id="fBox'+cnt+'">('+cnt+')';
-    	fileBox += '<input type="file" name="fName'+cnt+'" id="fName'+cnt+'" class="form-control-file border mb-2" style="float:left; width:85%;" />';
-    	fileBox += '<input type="button" value="삭제" onclick="deleteBox('+cnt+')" class="btn btn-danger form-control mb-2 ml-2" style="width:10%;" />';
+    	fileBox += '<div id="fBox'+cnt+'" class="d-flex align-items-center justify-content-center font-weight-bold mb-2">'+cnt+'.';
+    	fileBox += '<input type="file" name="fName'+cnt+'" id="fName'+cnt+'" class="form-control-file-md border mb-2" style="float:left;" />';
+    	fileBox += '<input type="button" value="삭제" onclick="deleteBox('+cnt+')" class="btn btn-danger btn-sm ml-2 mb-2" style="width:10%;" />';
     	fileBox += '';
     	fileBox += '</div>';
     	$("#fileBoxAppend").append(fileBox);
@@ -41,7 +43,7 @@
     	cnt--;
     }
 		
-		
+		// 파일 확인
 		function fCheck() {
 			let fName1 = $("#fName1").val();
 			let maxSize = 1024 * 1024 * 50 // 최대 50MByte 허용
@@ -83,59 +85,60 @@
 <body>
 <p><br /></p>
 <div class="container">
-	<div id="content">
-		<h2 class="text-center"><font size="15px;"><b>행 사 등 록</b></font></h2>
+	<div id="content" class="text-center">
+		<h2 class="text-center mb-5"><font size="15px;"><b>행 사 등 록</b></font></h2>
 		<form name="myform" method="post" action="${ctp}/ManagerEventInputOk.ma" enctype="multipart/form-data">
-			<div>
-				분류<br />
-				<select name="part" class="form-control mb-2" required>
+			<div class="d-flex align-items-center justify-content-center">
+				<label id="pa" for="part" class="font-weight-bold">분류</label>
+				<select name="part" class="form-control-md mb-4" style="margin-right:10px;" required>
 					<option disabled selected>선택하세요</option>
 					<option>봉사</option>
 					<option>체험</option>
 				</select>
 			</div>
-			<div>
-				행사명<br />
-				<input type="text" name="eventName" id="eventName" autofocus required class="form-control mb-2" />
+			<div class="d-flex align-items-center justify-content-center mb-4">
+				<span class="font-weight-bold mr-3">행사명</span>
+				<input type="text" name="eventName" id="eventName" autofocus required class="form-control-md mb-2" />
 			</div>
-			<div>
-				행사시간<br />
-				<input type="text" name="eTime" id="eTime" required class="form-control mb-2" />
+			<div class="d-flex align-items-center justify-content-center mb-4">
+				<span class="font-weight-bold mr-1">행사시간</span>
+				<input type="text" name="eTime" id="eTime" required class="form-control-md" />
 			</div>
-			<div>
-				모집정원<br />
-				<input type="text" name="people" id="people" required class="form-control mb-2" />
+			<div class="d-flex align-items-center justify-content-center mb-4">
+				<span class="font-weight-bold mr-1">모집정원</span>
+				<input type="text" name="people" id="people" required class="form-control-md" />
 			</div>
-			<div>
-				장소<br />
-				<input type="text" name="place" id="place" class="form-control mb-2" />
+			<div class="d-flex align-items-center justify-content-center mb-4">
+				<span id="p" class="font-weight-bold">장소</span>
+				<input type="text" name="place" id="place" class="form-control-md" />
 			</div>
-			<div>
-				참여 대상<br />
-				<input type="text" name="target" id="target" class="form-control mb-2" />
+			<div class="d-flex align-items-center justify-content-center mb-4">
+				<span class="font-weight-bold mr-1">참여 대상</span>
+				<input type="text" name="target" id="target" class="form-control-md" />
 			</div>
-			<div>
-				참가비<br />
-				<input type="text" name="money" id="money" class="form-control mb-2" />
+			<div class="d-flex align-items-center justify-content-center mb-4">
+				<span class="font-weight-bold mr-4">참가비</span>
+				<input type="text" name="money" id="money" class="form-control-md" />
 			</div>
 <!-- 			<div>
 				행사사진 / 상세내용 / 오시는길 사진&nbsp;<font color="red">(사진 3장을 선택하세요!)</font><br />
 				<input type="file" name="photo" id="photo" multiple required class="form-control-file mb-2" />
 			</div> -->
-	    <div>
-				행사사진 / 상세내용 / 오시는길 사진<br />
+	    <div class="align-items-center justify-content-center mb-4">
+				<span id="photo" class="font-weight-bold">행사사진 / 상세내용 / 오시는길 사진</span><br />
+	      <input type="file" name="fName1" id="fName1" class="form-control-file-md border"/>
 	      <input type="button" value="파일박스추가" onclick="fileBoxAppend()" class="btn btn-info btn-sm mb-2"/>
-	      <input type="file" name="fName1" id="fName1" class="form-control-file border mb-2"/>
 	    </div>
 	    <div id="fileBoxAppend"></div>
 			<div class="justify-content-center d-flex">
-				<input type="button" value="확인" onclick="fCheck()" class="btn btn-success" />
-				<input type="reset" value="재입력" class="btn btn-warning" />
+				<input type="button" value="확인" onclick="fCheck()" class="btn btn-success mr-2" />
+				<input type="reset" value="재입력" class="btn btn-warning mr-2" />
 				<input type="button" value="돌아가기" onclick="location.href	='${ctp}/';" class="btn btn-danger" />
 			</div>
 			<input type="hidden" name="fileSize" />
 		</form>	
 	</div><!-- //#content -->
 </div>		
+<p><br /></p>
 </body>
 </html>

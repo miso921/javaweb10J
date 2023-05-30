@@ -6,23 +6,19 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import manager.ManagerDAO;
+import manager.ManagerVO;
+
 public class EventDateInputCommand implements EventDateInterface {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		ManagerDAO dao = new ManagerDAO();
-//		
-//		ArrayList<String> eventNames = dao.getEventNameList(); 
-//		
-//		request.setAttribute("eventNames", eventNames);
+		int idx = request.getParameter("idx")== null ? 0 : Integer.parseInt(request.getParameter("idx"));
 		
-		String eventName = request.getParameter("eventName")== null ? "" : request.getParameter("eventName");
+		ManagerDAO dao = new ManagerDAO();
 		
-		request.setAttribute("eventName", eventName);
+		ManagerVO vo = dao.getEventContent(idx);
 		
-		
-		
-		
+		request.setAttribute("eventName", vo.getEventName());
 	}
-
 }
